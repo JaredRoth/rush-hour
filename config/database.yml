@@ -1,0 +1,13 @@
+# specify which database and adapter to use for which environment
+
+development:
+  adapter: postgresql
+  database: traffic-spy-development
+
+test:
+  adapter: postgresql
+  database: traffic-spy-test
+
+production:
+  adapter: postgresql
+  database: traffic-spy-production
