@@ -1,4 +1,4 @@
-module TrafficSpy
+module RushHour
   class Server < Sinatra::Base
     not_found do
       erb :error

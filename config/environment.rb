@@ -16,11 +16,11 @@ Dir[APP_ROOT.join('app', 'models', '*.rb')].each { |file| require file }
 require APP_ROOT.join('config', 'database')
 
 # configure Server settings
-module TrafficSpy
+module RushHour
   class Server < Sinatra::Base
     set :method_override, true
     set :root, APP_ROOT.to_path
-    set :views, File.join(TrafficSpy::Server.root, "app", "views")
-    set :public_folder, File.join(TrafficSpy::Server.root, "app", "public")
+    set :views, File.join(RushHour::Server.root, "app", "views")
+    set :public_folder, File.join(RushHour::Server.root, "app", "public")
   end
 end

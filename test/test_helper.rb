@@ -8,4 +8,4 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'capybara/dsl'
 
-Capybara.app = TrafficSpy::Server
+Capybara.app = RushHour::Server
