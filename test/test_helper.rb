@@ -30,7 +30,7 @@ module TestHelpers
   end
 
   def create_referrers
-    Referrers.create(:referrer => "http://jumpstartlab.com")
+    Referrer.create(:referred_by => "http://jumpstartlab.com")
   end
 
   def create_request_types
@@ -38,7 +38,7 @@ module TestHelpers
   end
 
   def create_events
-    Event.create(:event => "socialLogin")
+    Event.create(:event_name => "socialLogin")
   end
 
   def create_user_agents
@@ -53,19 +53,8 @@ module TestHelpers
     Ip.create(:ip => "63.29.38.211")
   end
 
+  def create_payloads
+    PayloadRequest.create(:requested_at => "2013-02-16 21:38:28 -0700", :responded_in => 37)
+  end
   # create one of these for each table
-
-  # def task_manager
-  #   database = Sequel.sqlite('db/task_manager_test.sqlite')
-  #   @task_manager ||= TaskManager.new(database)
-  # end
-  #
-  # def create_tasks(num = 2)
-  #   num.times do |i|
-  #     task_manager.create({
-  #       :title => "Task Title #{i + 1}",
-  #       :description => "Task Description #{i + 1}"
-  #       })
-  #   end
-  # end
 end
