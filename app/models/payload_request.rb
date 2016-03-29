@@ -8,4 +8,12 @@ class PayloadRequest < ActiveRecord::Base
   validates :user_agent_id,   presence: true
   validates :resolution_id,   presence: true
   validates :ip_id,           presence: true
+
+  belongs_to :urls
+  belongs_to :referrers
+  belongs_to :request_types
+  belongs_to :events
+  belongs_to :user_agents
+  belongs_to :resolutions
+  belongs_to :ips
 end
