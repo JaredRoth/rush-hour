@@ -21,4 +21,10 @@ class ResolutionTest < Minitest::Test
 
     assert_equal 3, Resolution.count
   end
+
+  def test_displays_all_resolutions
+    create_resolutions
+
+    assert_equal ["1920x1280", "800x500", "720x600"], Resolution.list_resolutions
+  end
 end

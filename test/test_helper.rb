@@ -27,7 +27,7 @@ module TestHelpers
 
   def create_urls
     Url.create(:url => "http://jumpstartlab.com/blog")
-    Url.create(:url => "http://google.com/about")
+    Url.create(:url => "http://yahoo.com/about")
     Url.create(:url => "http://yahoo.com/about")
     Url.create(nil)
   end
@@ -40,6 +40,8 @@ module TestHelpers
   end
 
   def create_request_types
+    RequestType.create(:request_type => "GET")
+    RequestType.create(:request_type => "GET")
     RequestType.create(:request_type => "GET")
     RequestType.create(:request_type => "POST")
     RequestType.create(nil)
@@ -82,7 +84,7 @@ module TestHelpers
     create_resolutions
     create_ips
     PayloadRequest.create(:requested_at => "2013-02-16 21:38:28 -0700",
-                          :responded_in => 37,
+                          :responded_in => 36,
                           :ip_id => Ip.last.id,
                           :resolution_id => Resolution.last.id,
                           :user_agent_id => UserAgent.last.id,
@@ -104,7 +106,7 @@ module TestHelpers
                           )
 
     PayloadRequest.create(:requested_at => "2013-02-16 21:38:28 -0700",
-                          :responded_in => 37,
+                          :responded_in => 38,
                           :ip_id => Ip.first.id,
                           :resolution_id => Resolution.first.id,
                           :user_agent_id => UserAgent.first.id,

@@ -18,4 +18,10 @@ class UserAgentTest < Minitest::Test
 
     assert_equal 3, UserAgent.count
   end
+
+  def test_browser_breakdown
+    create_user_agents
+
+    
+  end
 end

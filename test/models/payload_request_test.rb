@@ -17,7 +17,7 @@ class PayloadRequestTest < Minitest::Test
     assert request.respond_to?(:url_id)
 
     assert_equal 3, request.id
-    assert_equal 37, request.responded_in
+    assert_equal 38, request.responded_in
     # assert_equal "2013-02-16 21:38:28 -0700", request.requested_at
     assert_equal 1, request.ip_id
     assert_equal 1, request.resolution_id
@@ -31,5 +31,20 @@ class PayloadRequestTest < Minitest::Test
   def test_nil_payloads
     create_nil_payloads
     assert_nil PayloadRequest.first
+  end
+
+  def test_returns_correct_response_time_average
+    create_payloads
+    assert_equal 37, PayloadRequest.avg_response_time
+  end
+
+  def test_returns_highest_response_time
+    create_payloads
+    assert_equal 38, PayloadRequest.max_response_time
+  end
+
+  def test_returns_lowest_response_time
+    create_payloads
+    assert_equal 36, PayloadRequest.min_response_time
   end
 end
