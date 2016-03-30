@@ -3,6 +3,7 @@ class CreatePayloadRequest < ActiveRecord::Migration
     create_table :payload_requests do |t|
       t.text :url
       t.date :requested_at
+      # t.datetime :requested_at
       t.integer :responded_in
       t.text :referred_by
       t.text :request_type
