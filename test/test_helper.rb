@@ -51,6 +51,9 @@ module TestHelpers
     Event.create(nil)
     Event.create(:event_name => "socialLogin")
     Event.create(:event_name => "beginRegistration")
+    Event.create(:event_name => "socialLogin")
+    Event.create(:event_name => "socialLogin")
+    Event.create(:event_name => "beginRegistration")
     Event.create(:event_name => "thirdEvent")
   end
 
