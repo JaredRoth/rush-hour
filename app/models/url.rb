@@ -3,8 +3,6 @@ class Url < ActiveRecord::Base
   has_many :payload_requests
 
   def self.sort_most_requested
-    group(:url).count.group_by{|k,v|v}.values
-
-    group(:url).count.to_a.sort.reverse[0][0]
+    group(:url).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}
   end
 end

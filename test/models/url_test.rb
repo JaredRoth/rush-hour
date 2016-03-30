@@ -6,8 +6,8 @@ class UrlTest < Minitest::Test
     create_urls
 
     assert Url.first.respond_to?(:url)
-    assert_equal "http://jumpstartlab.com/blog", Url.first.url
     assert_equal "http://yahoo.com/about", Url.second.url
+    assert_equal "http://jumpstartlab.com/blog", Url.first.url
     assert_equal "http://yahoo.com/about", Url.last.url
   end
 
@@ -20,6 +20,6 @@ class UrlTest < Minitest::Test
   def test_sorts_urls_most_to_least_requested
     create_urls
 
-    assert_equal ["","",""], Url.sort_most_requested
+    assert_equal ["http://yahoo.com/about","http://jumpstartlab.com/blog"], Url.sort_most_requested
   end
 end
