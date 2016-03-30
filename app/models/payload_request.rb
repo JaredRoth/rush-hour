@@ -9,6 +9,16 @@ class PayloadRequest < ActiveRecord::Base
   validates :resolution_id,   presence: true
   validates :ip_id,           presence: true
 
+  validates :requested_at,    uniqueness: true 
+  validates :responded_in,    uniqueness: true
+  validates :url_id,          uniqueness: true
+  validates :referrer_id,     uniqueness: true
+  validates :request_type_id, uniqueness: true
+  validates :event_id,        uniqueness: true
+  validates :user_agent_id,   uniqueness: true
+  validates :resolution_id,   uniqueness: true
+  validates :ip_id,           uniqueness: true
+
   belongs_to :urls
   belongs_to :referrers
   belongs_to :request_types

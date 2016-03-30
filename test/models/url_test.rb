@@ -12,6 +12,9 @@ class UrlTest < Minitest::Test
   end
 
   def test_nil_does_not_get_created
+    #create urls - with value nil
+    # assert_equal 0, create....
+    
     create_urls
 
     assert_equal 3, Url.count
@@ -22,4 +25,24 @@ class UrlTest < Minitest::Test
 
     assert_equal ["http://yahoo.com/about","http://jumpstartlab.com/blog"], Url.sort_most_requested
   end
+
+  def test_return_maximum_response_time
+   create_payloads
+   url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
+   url2 = Url.find_by(url: "http://yahoo.com/about")
+
+   assert_equal 38, url1.max_response_time
+   assert_equal 37, url2.max_response_time
+  end
+
+  def test_return_minimum_response_time
+    create_payloads
+
+    url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
+    url2 = Url.find_by(url: "http://yahoo.com/about")
+
+    # assert_equal 38, url1.min_response_time
+    assert_equal 36, url2.min_response_time
+  end
+
 end

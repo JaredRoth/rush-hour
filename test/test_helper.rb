@@ -29,12 +29,10 @@ module TestHelpers
     Url.create(:url => "http://jumpstartlab.com/blog")
     Url.create(:url => "http://yahoo.com/about")
     Url.create(:url => "http://yahoo.com/about")
-    Url.create(nil)
   end
 
   def create_referrers
     Referrer.create(:referred_by => "http://jumpstartlab.com")
-    Referrer.create(nil)
     Referrer.create(:referred_by => "http://yahoo.com")
     Referrer.create(:referred_by => "http://apple.com")
   end
@@ -44,11 +42,9 @@ module TestHelpers
     RequestType.create(:request_type => "GET")
     RequestType.create(:request_type => "GET")
     RequestType.create(:request_type => "POST")
-    RequestType.create(nil)
   end
 
   def create_events
-    Event.create(nil)
     Event.create(:event_name => "socialLogin")
     Event.create(:event_name => "beginRegistration")
     Event.create(:event_name => "socialLogin")
@@ -60,13 +56,11 @@ module TestHelpers
   def create_user_agent_strings
     UserAgentString.create(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17")
     UserAgentString.create(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.15")
-    UserAgentString.create(nil)
     UserAgentString.create(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.16")
   end
 
   def create_resolutions
     Resolution.create(:resolution_width => "1920", :resolution_height => "1280")
-    Resolution.create(nil)
     Resolution.create(:resolution_width => "800", :resolution_height => "600")
     Resolution.create(:resolution_width => "720", :resolution_height => "500")
   end
@@ -74,7 +68,6 @@ module TestHelpers
   def create_ips
     Ip.create(:ip => "63.29.38.211")
     Ip.create(:ip => "63.29.38.212")
-    Ip.create(:ip => nil)
     Ip.create(:ip => "63.29.38.213")
   end
 
@@ -105,7 +98,7 @@ module TestHelpers
                           :event_id => Event.second.id,
                           :request_type_id => RequestType.second.id,
                           :referrer_id => Referrer.second.id,
-                          :url_id => Url.second.id
+                          :url_id => Url.last.id
                           )
 
     PayloadRequest.create(:requested_at => "2013-02-16 21:38:28 -0700",
@@ -116,7 +109,7 @@ module TestHelpers
                           :event_id => Event.first.id,
                           :request_type_id => RequestType.first.id,
                           :referrer_id => Referrer.first.id,
-                          :url_id => Url.first.id
+                          :url_id => Url.find_or_create_by(urls.url = "")
                           )
   end
 
