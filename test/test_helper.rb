@@ -57,11 +57,11 @@ module TestHelpers
     Event.create(:event_name => "thirdEvent")
   end
 
-  def create_user_agents
-    UserAgent.create(:user_agent => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17")
-    UserAgent.create(:user_agent => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.15")
-    UserAgent.create(nil)
-    UserAgent.create(:user_agent => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.16")
+  def create_user_agent_strings
+    UserAgentString.create(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17")
+    UserAgentString.create(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.15")
+    UserAgentString.create(nil)
+    UserAgentString.create(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.16")
   end
 
   def create_resolutions
@@ -83,14 +83,14 @@ module TestHelpers
     create_referrers
     create_request_types
     create_events
-    create_user_agents
+    create_user_agent_strings
     create_resolutions
     create_ips
     PayloadRequest.create(:requested_at => "2013-02-16 21:38:28 -0700",
                           :responded_in => 36,
                           :ip_id => Ip.last.id,
                           :resolution_id => Resolution.last.id,
-                          :user_agent_id => UserAgent.last.id,
+                          :user_agent_id => UserAgentString.last.id,
                           :event_id => Event.last.id,
                           :request_type_id => RequestType.last.id,
                           :referrer_id => Referrer.last.id,
@@ -101,7 +101,7 @@ module TestHelpers
                           :responded_in => 37,
                           :ip_id => Ip.second.id,
                           :resolution_id => Resolution.second.id,
-                          :user_agent_id => UserAgent.second.id,
+                          :user_agent_id => UserAgentString.second.id,
                           :event_id => Event.second.id,
                           :request_type_id => RequestType.second.id,
                           :referrer_id => Referrer.second.id,
@@ -112,7 +112,7 @@ module TestHelpers
                           :responded_in => 38,
                           :ip_id => Ip.first.id,
                           :resolution_id => Resolution.first.id,
-                          :user_agent_id => UserAgent.first.id,
+                          :user_agent_id => UserAgentString.first.id,
                           :event_id => Event.first.id,
                           :request_type_id => RequestType.first.id,
                           :referrer_id => Referrer.first.id,

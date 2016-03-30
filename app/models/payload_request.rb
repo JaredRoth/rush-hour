@@ -13,7 +13,7 @@ class PayloadRequest < ActiveRecord::Base
   belongs_to :referrers
   belongs_to :request_types
   belongs_to :events
-  belongs_to :user_agents
+  belongs_to :user_agent_strings
   belongs_to :resolutions
   belongs_to :ips
 

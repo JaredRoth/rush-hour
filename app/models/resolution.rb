@@ -4,9 +4,9 @@ class Resolution < ActiveRecord::Base
   has_many :payload_requests
 
   def self.list_resolutions
-    width = distinct.pluck(:resolution_width)
-    height = distinct.pluck(:resolution_height)
-    width.zip(height).map do |pair|
+    resolutions = distinct.pluck(:resolution_width, :resolution_height)
+
+    resolutions.map do |pair|
         pair[0].to_s + 'x' + pair[1].to_s
     end
   end
