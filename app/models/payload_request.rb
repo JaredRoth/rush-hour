@@ -5,7 +5,7 @@ class PayloadRequest < ActiveRecord::Base
   validates :referrer_id,     presence: true
   validates :request_type_id, presence: true
   validates :event_id,        presence: true
-  validates :user_agent_id,   presence: true
+  validates :user_agent_string_id,   presence: true
   validates :resolution_id,   presence: true
   validates :ip_id,           presence: true
 
@@ -18,7 +18,7 @@ class PayloadRequest < ActiveRecord::Base
   belongs_to :ip
 
   def self.avg_response_time
-    average(:responded_in)
+    average(:responded_in).to_f.round(2)
   end
 
   def self.min_response_time

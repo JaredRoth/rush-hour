@@ -25,12 +25,25 @@ class UserAgentStringTest < Minitest::Test
   def test_browser_breakdown
     create_payloads
 
-    assert_equal ["Chrome"], UserAgentString.browser_breakdown
+    assert_equal ["Chrome", "Safari"], UserAgentString.browser_breakdown
   end
 
   def test_operating_system_breakdown
     create_payloads
 
-    assert_equal ["Macintosh"], UserAgentString.operating_system_breakdown
+    assert_equal ["Windows", "Macintosh"], UserAgentString.operating_system_breakdown
+  end
+
+  def test_returns_simple_string
+    create_payloads
+
+    assert_equal  ["Chrome, Windows",
+                  "Chrome, Macintosh",
+                  "Chrome, Macintosh",
+                  "Safari, Windows",
+                  "Safari, Windows",
+                  "Chrome, Windows",
+                  "Chrome, Macintosh"],
+      UserAgentString.user_agent
   end
 end

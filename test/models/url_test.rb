@@ -51,8 +51,8 @@ class UrlTest < Minitest::Test
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal [39,38,37,35], url1.sort_urls_response_times
-    assert_equal [37,36], url2.sort_urls_response_times
+    assert_equal [39, 38, 38, 37, 35, 35], url1.sort_urls_response_times
+    assert_equal [37, 36, 36], url2.sort_urls_response_times
   end
 
   def test_returns_urls_avg_response_time
@@ -61,8 +61,8 @@ class UrlTest < Minitest::Test
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal 37.25, url1.urls_avg_response_time
-    assert_equal 36.5, url2.urls_avg_response_time
+    assert_equal 37, url1.urls_avg_response_time
+    assert_equal 36.33, url2.urls_avg_response_time
   end
 
   def test_returns_list_of_urls_request_types
@@ -81,7 +81,17 @@ class UrlTest < Minitest::Test
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal ["", "", ""], url1.urls_top_referrers
-    assert_equal ["", "", ""], url2.urls_top_referrers
+    assert_equal ["http://jumpstartlab.com", "http://apple.com", "http://yahoo.com"], url1.urls_top_referrers
+    assert_equal ["http://apple.com", "http://yahoo.com"], url2.urls_top_referrers
+  end
+
+  def test_returns_top_three_user_agents
+    create_payloads
+
+    url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
+    url2 = Url.find_by(url: "http://yahoo.com/about")
+
+    assert_equal ["Chrome, Macintosh", "Safari, Windows", "Chrome, Windows"], url1.urls_top_user_agents
+    assert_equal ["Chrome, Macintosh", "Chrome, Windows"], url2.urls_top_user_agents
   end
 end

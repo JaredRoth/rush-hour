@@ -3,6 +3,8 @@ class Url < ActiveRecord::Base
 
   has_many :payload_requests
   has_many :request_types, through: :payload_requests
+  has_many :referrers, through: :payload_requests
+  has_many :user_agent_strings, through: :payload_requests
 
   def self.sort_most_requested
     joins(:payload_requests).group(:url).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}
@@ -28,5 +30,11 @@ class Url < ActiveRecord::Base
     request_types.pluck(:request_type).uniq
   end
 
-  
+  def urls_top_referrers
+    referrers.group(:referred_by).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}[0..2]
+  end
+
+  def urls_top_user_agents
+    user_agent_strings.user_agent.group_by{|i|i}.sort_by{|k,v| v.count}.reverse.map{|pair| pair[0]}[0..2]
+  end
 end

@@ -30,7 +30,18 @@ module TestHelpers
                           :responded_in     => 36,
                           :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.213").id,
                           :resolution_id    => Resolution.find_or_create_by(:resolution_width => "720", :resolution_height => "500").id,
-                          :user_agent_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.16").id,
+                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Windows; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.16").id,
+                          :event_id         => Event.find_or_create_by(:event_name => "thirdEvent").id,
+                          :request_type_id  => RequestType.find_or_create_by(:request_type => "POST").id,
+                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://apple.com").id,
+                          :url_id           => Url.find_or_create_by(:url => "http://yahoo.com/about").id
+                          )
+
+    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
+                          :responded_in     => 36,
+                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.213").id,
+                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "720", :resolution_height => "500").id,
+                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.16").id,
                           :event_id         => Event.find_or_create_by(:event_name => "thirdEvent").id,
                           :request_type_id  => RequestType.find_or_create_by(:request_type => "POST").id,
                           :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://apple.com").id,
@@ -41,7 +52,7 @@ module TestHelpers
                           :responded_in     => 37,
                           :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.212").id,
                           :resolution_id    => Resolution.find_or_create_by(:resolution_width => "800", :resolution_height => "600").id,
-                          :user_agent_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.15").id,
+                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.15").id,
                           :event_id         => Event.find_or_create_by(:event_name => "beginRegistration").id,
                           :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
                           :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://yahoo.com").id,
@@ -52,7 +63,7 @@ module TestHelpers
                           :responded_in     => 37,
                           :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.212").id,
                           :resolution_id    => Resolution.find_or_create_by(:resolution_width => "800", :resolution_height => "600").id,
-                          :user_agent_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.15").id,
+                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Windows; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Firefox/24.0.1309.0 Safari/537.15").id,
                           :event_id         => Event.find_or_create_by(:event_name => "beginRegistration").id,
                           :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
                           :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://yahoo.com").id,
@@ -63,10 +74,10 @@ module TestHelpers
                           :responded_in     => 38,
                           :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.211").id,
                           :resolution_id    => Resolution.find_or_create_by(:resolution_width => "1920", :resolution_height => "1280").id,
-                          :user_agent_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
+                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Windows; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Firefox/24.0.1309.0 Safari/537.17").id,
                           :event_id         => Event.find_or_create_by(:event_name => "socialLogin").id,
                           :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
-                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://jumpstartlab.com").id,
+                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://apple.com").id,
                           :url_id           => Url.find_or_create_by(:url => "http://jumpstartlab.com/blog").id
                           )
 
@@ -74,7 +85,29 @@ module TestHelpers
                           :responded_in     => 35,
                           :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.211").id,
                           :resolution_id    => Resolution.find_or_create_by(:resolution_width => "1920", :resolution_height => "1280").id,
-                          :user_agent_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
+                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Windows; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
+                          :event_id         => Event.find_or_create_by(:event_name => "socialLogin").id,
+                          :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
+                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://jumpstartlab.com").id,
+                          :url_id           => Url.find_or_create_by(:url => "http://jumpstartlab.com/blog").id
+                          )
+
+    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
+                          :responded_in     => 38,
+                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.211").id,
+                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "1920", :resolution_height => "1280").id,
+                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
+                          :event_id         => Event.find_or_create_by(:event_name => "socialLogin").id,
+                          :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
+                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://apple.com").id,
+                          :url_id           => Url.find_or_create_by(:url => "http://jumpstartlab.com/blog").id
+                          )
+
+    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
+                          :responded_in     => 35,
+                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.211").id,
+                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "1920", :resolution_height => "1280").id,
+                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
                           :event_id         => Event.find_or_create_by(:event_name => "socialLogin").id,
                           :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
                           :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://jumpstartlab.com").id,
@@ -85,7 +118,7 @@ module TestHelpers
                           :responded_in     => 39,
                           :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.211").id,
                           :resolution_id    => Resolution.find_or_create_by(:resolution_width => "1920", :resolution_height => "1280").id,
-                          :user_agent_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
+                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
                           :event_id         => Event.find_or_create_by(:event_name => "socialLogin").id,
                           :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
                           :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://jumpstartlab.com").id,
