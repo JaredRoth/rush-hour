@@ -5,7 +5,7 @@ class Url < ActiveRecord::Base
   has_many :payload_requests
 
   def self.sort_most_requested
-    group(:url).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}
+    joins(:payload_requests).group(:url).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}
   end
 
   def max_response_time

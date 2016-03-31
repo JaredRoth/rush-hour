@@ -3,9 +3,6 @@ class Event < ActiveRecord::Base
   has_many :payload_requests
 
   def self.sort_most_received
-    require 'pry'; binding.pry
-    group(:event_name).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}
-
-    payload_requests.minimum(:responded_in)
+    joins(:payload_requests).group(:event_name).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}
   end
 end

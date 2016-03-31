@@ -25,12 +25,6 @@ module TestHelpers
     super
   end
 
-  def create_urls
-    Url.create(:url => "http://jumpstartlab.com/blog")
-    Url.create(:url => "http://yahoo.com/about")
-    Url.create(:url => "http://yahoo.com/about")
-  end
-
   def create_referrers
     Referrer.create(:referred_by => "http://jumpstartlab.com")
     Referrer.create(:referred_by => "http://yahoo.com")
@@ -98,7 +92,7 @@ module TestHelpers
                           :event_id         => Event.find_or_create_by(:event_name => "beginRegistration").id,
                           :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
                           :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://yahoo.com").id,
-                          :url_id           => Url.find_or_create_by(:url => "http://yahoo.com/about").id
+                          :url_id           => Url.find_or_create_by(:url => "http://jumpstartlab.com/blog").id
                           )
 
     PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",

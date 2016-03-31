@@ -3,7 +3,9 @@ require_relative '../test_helper'
 class UrlTest < Minitest::Test
   include TestHelpers
   def test_responds_to_table_header
-    create_urls
+    Url.create(:url => "http://jumpstartlab.com/blog")
+    Url.create(:url => "http://yahoo.com/about")
+    Url.create(:url => "http://yahoo.com/about")
 
     assert Url.first.respond_to?(:url)
     assert_equal "http://yahoo.com/about", Url.second.url
@@ -12,18 +14,15 @@ class UrlTest < Minitest::Test
   end
 
   def test_nil_does_not_get_created
-    #create urls - with value nil
-    # assert_equal 0, create....
-    
-    create_urls
+    Url.create(nil)
 
-    assert_equal 3, Url.count
+    assert_equal 0, Url.count
   end
 
   def test_sorts_urls_most_to_least_requested
-    create_urls
+    create_payloads
 
-    assert_equal ["http://yahoo.com/about","http://jumpstartlab.com/blog"], Url.sort_most_requested
+    assert_equal ["http://jumpstartlab.com/blog", "http://yahoo.com/about"], Url.sort_most_requested
   end
 
   def test_return_maximum_response_time
@@ -31,7 +30,7 @@ class UrlTest < Minitest::Test
    url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
    url2 = Url.find_by(url: "http://yahoo.com/about")
 
-   assert_equal 38, url1.max_response_time
+   assert_equal 39, url1.max_response_time
    assert_equal 37, url2.max_response_time
   end
 
@@ -41,8 +40,7 @@ class UrlTest < Minitest::Test
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    # assert_equal 38, url1.min_response_time
+    assert_equal 35, url1.min_response_time
     assert_equal 36, url2.min_response_time
   end
-
 end

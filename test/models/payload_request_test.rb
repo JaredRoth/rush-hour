@@ -51,11 +51,11 @@ class PayloadRequestTest < Minitest::Test
 
   def test_returns_highest_response_time
     create_payloads
-    assert_equal 38, PayloadRequest.max_response_time
+    assert_equal 39, PayloadRequest.max_response_time
   end
 
   def test_returns_lowest_response_time
     create_payloads
-    assert_equal 36, PayloadRequest.min_response_time
+    assert_equal 35, PayloadRequest.min_response_time
   end
 end
