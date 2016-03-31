@@ -2,7 +2,7 @@ class Url < ActiveRecord::Base
   validates :url, presence: true
 
   has_many :payload_requests
-  has_many :request_types, through: :payload_requests, source: "request_type_id"
+  has_many :request_types, through: :payload_requests
 
   def self.sort_most_requested
     joins(:payload_requests).group(:url).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}
@@ -25,9 +25,8 @@ class Url < ActiveRecord::Base
   end
 
   def urls_request_types
-    # require 'pry'; binding.pry
-    # payload_requests.
-
-    # RequestType.find(Url.first.payload_requests.first.request_type_id)
+    request_types.pluck(:request_type).uniq
   end
+
+  
 end

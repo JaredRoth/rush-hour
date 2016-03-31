@@ -9,13 +9,13 @@ class PayloadRequest < ActiveRecord::Base
   validates :resolution_id,   presence: true
   validates :ip_id,           presence: true
 
-  belongs_to :urls
-  belongs_to :referrers
-  belongs_to :request_types
-  belongs_to :events
-  belongs_to :user_agent_strings
-  belongs_to :resolutions
-  belongs_to :ips
+  belongs_to :url
+  belongs_to :referrer
+  belongs_to :request_type
+  belongs_to :event
+  belongs_to :user_agent_string
+  belongs_to :resolution
+  belongs_to :ip
 
   def self.avg_response_time
     average(:responded_in)

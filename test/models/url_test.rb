@@ -71,7 +71,17 @@ class UrlTest < Minitest::Test
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal ["PUT"], url1.urls_request_types
-    assert_equal ["PUT"], url2.urls_request_types
+    assert_equal ["GET"], url1.urls_request_types
+    assert_equal ["POST", "GET"], url2.urls_request_types
+  end
+
+  def test_returns_top_three_referrers
+    create_payloads
+
+    url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
+    url2 = Url.find_by(url: "http://yahoo.com/about")
+
+    assert_equal ["", "", ""], url1.urls_top_referrers
+    assert_equal ["", "", ""], url2.urls_top_referrers
   end
 end

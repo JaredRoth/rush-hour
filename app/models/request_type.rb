@@ -2,7 +2,7 @@ class RequestType < ActiveRecord::Base
   validates :request_type, presence: true
 
   has_many :payload_requests
-  has_many :urls, through: :payload_requests, source: "url_id"
+  has_many :urls, through: :payload_requests
 
   def self.most_frequent
     joins(:payload_requests).group(:request_type).count.max_by{|k,v|v}.first
