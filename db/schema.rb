@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331200758) do
+ActiveRecord::Schema.define(version: 20160331212535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
     t.text "identifier"
-    t.text "root_url"
+    t.text "rootUrl"
   end
 
   create_table "events", force: :cascade do |t|
