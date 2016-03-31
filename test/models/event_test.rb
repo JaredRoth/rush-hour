@@ -12,14 +12,13 @@ class EventTest < Minitest::Test
   end
 
   def test_nil_does_not_get_created
-    create_events
+    Event.create(nil)
 
-    assert_equal 6, Event.count
+    assert_equal 0, Event.count
   end
 
   def test_sorts_events_most_to_least_received
-    create_events
-
+    create_payloads
     assert_equal ["socialLogin", "beginRegistration", "thirdEvent"], Event.sort_most_received
   end
 end

@@ -13,7 +13,7 @@ class RequestTypeTest < Minitest::Test
   def test_nil_does_not_get_created
     create_request_types
 
-    assert_equal 4, RequestType.count
+    assert_equal 3, RequestType.count
   end
 
   def test_finds_most_used_request
@@ -25,6 +25,6 @@ class RequestTypeTest < Minitest::Test
   def test_lists_all_request_types
     create_request_types
 
-    assert_equal ["POST", "GET"], RequestType.list_all_verbs
+    assert_equal ["GET", "POST"], RequestType.list_all_verbs
   end
 end
