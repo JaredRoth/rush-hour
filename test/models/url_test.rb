@@ -27,11 +27,12 @@ class UrlTest < Minitest::Test
 
   def test_return_maximum_response_time
    create_payloads
+
    url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
    url2 = Url.find_by(url: "http://yahoo.com/about")
 
-   assert_equal 39, url1.max_response_time
-   assert_equal 37, url2.max_response_time
+   assert_equal 39, url1.urls_max_response_time
+   assert_equal 37, url2.urls_max_response_time
   end
 
   def test_return_minimum_response_time
@@ -40,7 +41,37 @@ class UrlTest < Minitest::Test
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal 35, url1.min_response_time
-    assert_equal 36, url2.min_response_time
+    assert_equal 35, url1.urls_min_response_time
+    assert_equal 36, url2.urls_min_response_time
+  end
+
+  def test_sorts_response_times_longest_to_shortest
+    create_payloads
+
+    url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
+    url2 = Url.find_by(url: "http://yahoo.com/about")
+
+    assert_equal [39,38,37,35], url1.sort_urls_response_times
+    assert_equal [37,36], url2.sort_urls_response_times
+  end
+
+  def test_returns_urls_avg_response_time
+    create_payloads
+
+    url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
+    url2 = Url.find_by(url: "http://yahoo.com/about")
+
+    assert_equal 37.25, url1.urls_avg_response_time
+    assert_equal 36.5, url2.urls_avg_response_time
+  end
+
+  def test_returns_list_of_urls_request_types
+    create_payloads
+
+    url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
+    url2 = Url.find_by(url: "http://yahoo.com/about")
+
+    assert_equal ["PUT"], url1.urls_request_types
+    assert_equal ["PUT"], url2.urls_request_types
   end
 end

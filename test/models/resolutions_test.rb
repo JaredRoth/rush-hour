@@ -3,9 +3,13 @@ require_relative '../test_helper'
 class ResolutionTest < Minitest::Test
   include TestHelpers
   def test_responds_to_table_header
-    create_resolutions
+    Resolution.create(:resolution_width => "1920", :resolution_height => "1280")
+    Resolution.create(:resolution_width => "800", :resolution_height => "600")
+    Resolution.create(:resolution_width => "720", :resolution_height => "500")
+
     assert Resolution.first.respond_to?(:resolution_width)
     assert Resolution.first.respond_to?(:resolution_height)
+    
     assert_equal 1920, Resolution.first.resolution_width
     assert_equal 1280, Resolution.first.resolution_height
 
@@ -17,13 +21,13 @@ class ResolutionTest < Minitest::Test
   end
 
   def test_nil_does_not_get_created
-    create_resolutions
+    Resolution.create(nil)
 
-    assert_equal 3, Resolution.count
+    assert_equal 0, Resolution.count
   end
 
   def test_displays_all_resolutions
-    create_resolutions
+    create_payloads
 
     assert Resolution.list_resolutions.include?("720x500")
     assert Resolution.list_resolutions.include?("800x600")
