@@ -6,8 +6,8 @@ class Resolution < ActiveRecord::Base
   def self.list_resolutions
     resolutions = distinct.pluck(:resolution_width, :resolution_height)
 
-    resolutions.map do |pair|
-        pair[0].to_s + 'x' + pair[1].to_s
+    resolutions.map do |width, height|
+        width.to_s + 'x' + height.to_s
     end
   end
 end

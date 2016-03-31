@@ -4,6 +4,7 @@ class PayloadRequestTest < Minitest::Test
   include TestHelpers
   def test_responds_to_table_headers
     create_payloads
+    # check how many payloads are being created
     request = PayloadRequest.first
 
     assert request.respond_to?(:requested_at)

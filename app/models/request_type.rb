@@ -6,6 +6,7 @@ class RequestType < ActiveRecord::Base
 
   def self.most_frequent
     joins(:payload_requests).group(:request_type).count.max_by{|k,v|v}.first
+    # try to refactor using order
   end
 
   def self.list_all_verbs

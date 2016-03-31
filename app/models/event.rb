@@ -4,5 +4,6 @@ class Event < ActiveRecord::Base
 
   def self.sort_most_received
     joins(:payload_requests).group(:event_name).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}
+    # joins(:payload_requests).group(:event_name).order("count_all desc").count
   end
 end

@@ -3,7 +3,8 @@ require_relative '../test_helper'
 class RequestTypeTest < Minitest::Test
   include TestHelpers
   def test_responds_to_table_header
-    RequestType.create(:request_type => "GET")
+    request1 = RequestType.create(:request_type => "GET")
+    # save as locals
     RequestType.create(:request_type => "POST")
 
     assert RequestType.first.respond_to?(:request_type)

@@ -8,10 +8,12 @@ class Url < ActiveRecord::Base
 
   def self.sort_most_requested
     joins(:payload_requests).group(:url).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}
+    # check refactoring using order
   end
 
   def urls_max_response_time
     payload_requests.maximum(:responded_in)
+    # payload_requests.max_response_time
   end
 
   def urls_min_response_time
@@ -32,6 +34,7 @@ class Url < ActiveRecord::Base
 
   def urls_top_referrers
     referrers.group(:referred_by).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}[0..2]
+    # check order
   end
 
   def urls_top_user_agents

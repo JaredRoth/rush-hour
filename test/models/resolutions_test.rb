@@ -4,12 +4,13 @@ class ResolutionTest < Minitest::Test
   include TestHelpers
   def test_responds_to_table_header
     Resolution.create(:resolution_width => "1920", :resolution_height => "1280")
+    # save as locals
     Resolution.create(:resolution_width => "800", :resolution_height => "600")
     Resolution.create(:resolution_width => "720", :resolution_height => "500")
 
     assert Resolution.first.respond_to?(:resolution_width)
     assert Resolution.first.respond_to?(:resolution_height)
-    
+
     assert_equal 1920, Resolution.first.resolution_width
     assert_equal 1280, Resolution.first.resolution_height
 
@@ -28,6 +29,13 @@ class ResolutionTest < Minitest::Test
 
   def test_displays_all_resolutions
     create_payloads
+
+    resolutions = Resolution.list_resolutions
+    #
+    # ["720x500", "800x600", "1920x1280"].each_with_index do |res, i|
+    #   assert_equal res, resolutions[i]
+    # end
+    #
 
     assert Resolution.list_resolutions.include?("720x500")
     assert Resolution.list_resolutions.include?("800x600")

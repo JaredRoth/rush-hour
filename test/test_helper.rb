@@ -31,6 +31,7 @@ module TestHelpers
                           :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.213").id,
                           :resolution_id    => Resolution.find_or_create_by(:resolution_width => "720", :resolution_height => "500").id,
                           :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Windows; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.16").id,
+                          # :user_agent_string_id    => UserAgentString.find_or_create_by(broswer: "Chrome", os: "Windows").id,
                           :event_id         => Event.find_or_create_by(:event_name => "thirdEvent").id,
                           :request_type_id  => RequestType.find_or_create_by(:request_type => "POST").id,
                           :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://apple.com").id,
