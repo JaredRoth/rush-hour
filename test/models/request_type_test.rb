@@ -4,13 +4,12 @@ class RequestTypeTest < Minitest::Test
   include TestHelpers
   def test_responds_to_table_header
     request1 = RequestType.create(:request_type => "GET")
-    # save as locals
-    RequestType.create(:request_type => "POST")
+    request2 = RequestType.create(:request_type => "POST")
 
-    assert RequestType.first.respond_to?(:request_type)
+    assert request1.respond_to?(:request_type)
 
-    assert_equal "GET", RequestType.first.request_type
-    assert_equal "POST", RequestType.last.request_type
+    assert_equal "GET", request1.request_type
+    assert_equal "POST", request2.request_type
   end
 
   def test_nil_does_not_get_created
@@ -20,13 +19,13 @@ class RequestTypeTest < Minitest::Test
   end
 
   def test_finds_most_used_request
-    create_payloads
+    create_payloads(3)
 
     assert_equal "GET", RequestType.most_frequent
   end
 
   def test_lists_all_request_types
-    create_payloads
+    create_payloads(2)
 
     assert_equal ["GET", "POST"], RequestType.list_all_verbs
   end

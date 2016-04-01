@@ -3,8 +3,7 @@ require_relative '../test_helper'
 class PayloadRequestTest < Minitest::Test
   include TestHelpers
   def test_responds_to_table_headers
-    create_payloads
-    # check how many payloads are being created
+    create_payloads(1)
     request = PayloadRequest.first
 
     assert request.respond_to?(:requested_at)
@@ -16,9 +15,10 @@ class PayloadRequestTest < Minitest::Test
     assert request.respond_to?(:request_type_id)
     assert request.respond_to?(:referrer_id)
     assert request.respond_to?(:url_id)
+    assert request.respond_to?(:client_id)
 
     assert_equal 1, request.id
-    assert_equal 36, request.responded_in
+    assert_equal 35, request.responded_in
     assert_equal DateTime.parse("2013-02-16 21:38:28 -0700"), request.requested_at
     assert_equal 1, request.ip_id
     assert_equal 1, request.resolution_id
@@ -27,6 +27,7 @@ class PayloadRequestTest < Minitest::Test
     assert_equal 1, request.request_type_id
     assert_equal 1, request.referrer_id
     assert_equal 1, request.url_id
+    assert_equal 1, request.client_id
   end
 
   def test_nil_payloads
@@ -38,7 +39,8 @@ class PayloadRequestTest < Minitest::Test
                           :event_id => nil,
                           :request_type_id => nil,
                           :referrer_id => nil,
-                          :url_id => nil
+                          :url_id => nil,
+                          :client_id => nil
                           )
 
     assert_nil PayloadRequest.first
@@ -46,17 +48,17 @@ class PayloadRequestTest < Minitest::Test
   end
 
   def test_returns_correct_response_time_average
-    create_payloads
-    assert_equal 36.78, PayloadRequest.avg_response_time
+    create_payloads(3)
+    assert_equal 36, PayloadRequest.avg_response_time
   end
 
   def test_returns_highest_response_time
-    create_payloads
-    assert_equal 39, PayloadRequest.max_response_time
+    create_payloads(2)
+    assert_equal 36, PayloadRequest.max_response_time
   end
 
   def test_returns_lowest_response_time
-    create_payloads
+    create_payloads(2)
     assert_equal 35, PayloadRequest.min_response_time
   end
 end
