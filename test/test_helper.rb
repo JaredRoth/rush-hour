@@ -25,105 +25,156 @@ module TestHelpers
     super
   end
 
-  def create_payloads
-    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
-                          :responded_in     => 36,
-                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.213").id,
-                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "720", :resolution_height => "500").id,
-                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Windows; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.16").id,
-                          # :user_agent_string_id    => UserAgentString.find_or_create_by(broswer: "Chrome", os: "Windows").id,
-                          :event_id         => Event.find_or_create_by(:event_name => "thirdEvent").id,
-                          :request_type_id  => RequestType.find_or_create_by(:request_type => "POST").id,
-                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://apple.com").id,
-                          :url_id           => Url.find_or_create_by(:url => "http://yahoo.com/about").id
-                          )
+  def create_payloads(num)
+    params = [
+      { :requested_at       => "2013-02-16 21:38:28 -0700",
+        :responded_in       => 35,
+        :ip                 => "63.29.38.213",
+        :resolution_width   => "1920",
+        :resolution_height  => "1280",
+        :user_agent_os      => "Windows",
+        :user_agent_browser => "Chrome",
+        :event_name         => "thirdEvent",
+        :request_type       => "POST",
+        :referred_by        => "http://apple.com",
+        :url                => "http://jumpstartlab.com/blog",
+        :identifier         => "jumpstartlab",
+        :rootUrl            => "http://jumpstartlab.com"
+      },
+      { :requested_at       => "2013-02-16 21:38:28 -0700",
+        :responded_in       => 36,
+        :ip                 => "63.29.38.212",
+        :resolution_width   => "720",
+        :resolution_height  => "500",
+        :user_agent_os      => "Macintosh",
+        :user_agent_browser => "Safari",
+        :event_name         => "thirdEvent",
+        :request_type       => "GET",
+        :referred_by        => "http://apple.com",
+        :url                => "http://jumpstartlab.com/blog",
+        :identifier         => "yahoo",
+        :rootUrl            => "http://yahoo.com"
+      },
+      { :requested_at       => "2013-02-16 21:38:28 -0700",
+        :responded_in       => 37,
+        :ip                 => "63.29.38.211",
+        :resolution_width   => "800",
+        :resolution_height  => "600",
+        :user_agent_os      => "Macintosh",
+        :user_agent_browser => "Firefox",
+        :event_name         => "beginRegistration",
+        :request_type       => "GET",
+        :referred_by        => "http://yahoo.com",
+        :url                => "http://yahoo.com/about",
+        :identifier         => "apple",
+        :rootUrl            => "http://apple.com"
+      },
+      { :requested_at       => "2013-02-16 21:38:28 -0700",
+        :responded_in       => 38,
+        :ip                 => "63.29.38.212",
+        :resolution_width   => "800",
+        :resolution_height  => "600",
+        :user_agent_os      => "Windows",
+        :user_agent_browser => "Safari",
+        :event_name         => "beginRegistration",
+        :request_type       => "POST",
+        :referred_by        => "http://yahoo.com",
+        :url                => "http://yahoo.com/about",
+        :identifier         => "yahoo",
+        :rootUrl            => "http://yahoo.com"
+      },
+      { :requested_at       => "2013-02-16 21:38:28 -0700",
+        :responded_in       => 39,
+        :ip                 => "63.29.38.211",
+        :resolution_width   => "1920",
+        :resolution_height  => "1280",
+        :user_agent_os      => "Windows",
+        :user_agent_browser => "Safari",
+        :event_name         => "thirdEvent",
+        :request_type       => "GET",
+        :referred_by        => "http://apple.com",
+        :url                => "http://yahoo.com/about",
+        :identifier         => "yahoo",
+        :rootUrl            => "http://yahoo.com"
+      },
+      { :requested_at       => "2013-02-16 21:38:28 -0700",
+        :responded_in       => 35,
+        :ip                 => "63.29.38.211",
+        :resolution_width   => "1920",
+        :resolution_height  => "1280",
+        :user_agent_os      => "Windows",
+        :user_agent_browser => "Chrome",
+        :event_name         => "socialLogin",
+        :request_type       => "GET",
+        :referred_by        => "http://jumpstartlab.com",
+        :url                => "http://jumpstartlab.com/blog",
+        :identifier         => "yahoo",
+        :rootUrl            => "http://yahoo.com"
+      },
+      { :requested_at       => "2013-02-16 21:38:28 -0700",
+        :responded_in       => 38,
+        :ip                 => "63.29.38.211",
+        :resolution_width   => "1920",
+        :resolution_height  => "1280",
+        :user_agent_os      => "Macintosh",
+        :user_agent_browser => "Chrome",
+        :event_name         => "socialLogin",
+        :request_type       => "GET",
+        :referred_by        => "http://apple.com",
+        :url                => "http://jumpstartlab.com/blog",
+        :identifier         => "yahoo",
+        :rootUrl            => "http://yahoo.com"
+      },
+      { :requested_at       => "2013-02-16 21:38:28 -0700",
+        :responded_in       => 35,
+        :ip                 => "63.29.38.211",
+        :resolution_width   => "1920",
+        :resolution_height  => "1280",
+        :user_agent_os      => "Macintosh",
+        :user_agent_browser => "Safari",
+        :event_name         => "socialLogin",
+        :request_type       => "GET",
+        :referred_by        => "http://jumpstartlab.com",
+        :url                => "http://jumpstartlab.com/blog",
+        :identifier         => "yahoo",
+        :rootUrl            => "http://yahoo.com"
+      },
+      { :requested_at       => "2013-02-16 21:38:28 -0700",
+        :responded_in       => 39,
+        :ip                 => "63.29.38.211",
+        :resolution_width   => "1920",
+        :resolution_height  => "1280",
+        :user_agent_os      => "Macintosh",
+        :user_agent_browser => "Chrome",
+        :event_name         => "socialLogin",
+        :request_type       => "POST",
+        :referred_by        => "http://yahoo.com",
+        :url                => "http://jumpstartlab.com/blog",
+        :identifier         => "yahoo",
+        :rootUrl            => "http://yahoo.com"
+      }]
+    num.times do |i|
+      ip                = Ip.find_or_create_by(:ip => params[i][:ip])
+      resolution        = Resolution.find_or_create_by(:resolution_width => params[i][:resolution_width], :resolution_height => params[i][:resolution_height])
+      user_agent_string = UserAgentString.find_or_create_by(:user_agent_os => params[i][:user_agent_os], :user_agent_browser => params[i][:user_agent_browser])
+      event             = Event.find_or_create_by(:event_name => params[i][:event_name])
+      request_type      = RequestType.find_or_create_by(:request_type => params[i][:request_type])
+      referrer          = Referrer.find_or_create_by(:referred_by => params[i][:referred_by])
+      url               = Url.find_or_create_by(:url => params[i][:url])
+      client            = Client.find_or_create_by(:identifier => params[i][:identifier], :rootUrl => params[i][:rootUrl])
 
-    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
-                          :responded_in     => 36,
-                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.213").id,
-                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "720", :resolution_height => "500").id,
-                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.16").id,
-                          :event_id         => Event.find_or_create_by(:event_name => "thirdEvent").id,
-                          :request_type_id  => RequestType.find_or_create_by(:request_type => "POST").id,
-                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://apple.com").id,
-                          :url_id           => Url.find_or_create_by(:url => "http://yahoo.com/about").id
-                          )
-
-    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
-                          :responded_in     => 37,
-                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.212").id,
-                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "800", :resolution_height => "600").id,
-                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.15").id,
-                          :event_id         => Event.find_or_create_by(:event_name => "beginRegistration").id,
-                          :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
-                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://yahoo.com").id,
-                          :url_id           => Url.find_or_create_by(:url => "http://yahoo.com/about").id
-                          )
-
-    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
-                          :responded_in     => 37,
-                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.212").id,
-                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "800", :resolution_height => "600").id,
-                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Windows; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Firefox/24.0.1309.0 Safari/537.15").id,
-                          :event_id         => Event.find_or_create_by(:event_name => "beginRegistration").id,
-                          :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
-                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://yahoo.com").id,
-                          :url_id           => Url.find_or_create_by(:url => "http://jumpstartlab.com/blog").id
-                          )
-
-    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
-                          :responded_in     => 38,
-                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.211").id,
-                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "1920", :resolution_height => "1280").id,
-                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Windows; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Firefox/24.0.1309.0 Safari/537.17").id,
-                          :event_id         => Event.find_or_create_by(:event_name => "socialLogin").id,
-                          :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
-                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://apple.com").id,
-                          :url_id           => Url.find_or_create_by(:url => "http://jumpstartlab.com/blog").id
-                          )
-
-    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
-                          :responded_in     => 35,
-                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.211").id,
-                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "1920", :resolution_height => "1280").id,
-                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Windows; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
-                          :event_id         => Event.find_or_create_by(:event_name => "socialLogin").id,
-                          :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
-                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://jumpstartlab.com").id,
-                          :url_id           => Url.find_or_create_by(:url => "http://jumpstartlab.com/blog").id
-                          )
-
-    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
-                          :responded_in     => 38,
-                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.211").id,
-                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "1920", :resolution_height => "1280").id,
-                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
-                          :event_id         => Event.find_or_create_by(:event_name => "socialLogin").id,
-                          :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
-                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://apple.com").id,
-                          :url_id           => Url.find_or_create_by(:url => "http://jumpstartlab.com/blog").id
-                          )
-
-    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
-                          :responded_in     => 35,
-                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.211").id,
-                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "1920", :resolution_height => "1280").id,
-                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
-                          :event_id         => Event.find_or_create_by(:event_name => "socialLogin").id,
-                          :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
-                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://jumpstartlab.com").id,
-                          :url_id           => Url.find_or_create_by(:url => "http://jumpstartlab.com/blog").id
-                          )
-
-    PayloadRequest.create(:requested_at     => "2013-02-16 21:38:28 -0700",
-                          :responded_in     => 39,
-                          :ip_id            => Ip.find_or_create_by(:ip => "63.29.38.211").id,
-                          :resolution_id    => Resolution.find_or_create_by(:resolution_width => "1920", :resolution_height => "1280").id,
-                          :user_agent_string_id    => UserAgentString.find_or_create_by(:user_agent_string => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17").id,
-                          :event_id         => Event.find_or_create_by(:event_name => "socialLogin").id,
-                          :request_type_id  => RequestType.find_or_create_by(:request_type => "GET").id,
-                          :referrer_id      => Referrer.find_or_create_by(:referred_by => "http://jumpstartlab.com").id,
-                          :url_id           => Url.find_or_create_by(:url => "http://jumpstartlab.com/blog").id
-                          )
+      PayloadRequest.create(
+      :requested_at         => params[i][:requested_at],
+      :responded_in         => params[i][:responded_in],
+      :ip_id                => ip.id,
+      :resolution_id        => resolution.id,
+      :user_agent_string_id => user_agent_string.id,
+      :event_id             => event.id,
+      :request_type_id      => request_type.id,
+      :referrer_id          => referrer.id,
+      :url_id               => url.id,
+      :client_id            => client.id
+      )
+    end
   end
 end
