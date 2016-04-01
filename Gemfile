@@ -6,6 +6,7 @@ gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'rake'
 gem 'useragent'
+gem 'json'
 
 group :development, :test do
   gem 'pry'
