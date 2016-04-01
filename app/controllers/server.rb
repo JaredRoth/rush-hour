@@ -9,20 +9,28 @@ module RushHour
     end
 
     post '/sources' do
-      client = Client.new(params[:client])
+      client = Client.new(params)
 
       if client.save
         status 200
-        body "{'identifier':'#{client.identifier}'}"
+        message = {identifier: client.identifier}.to_json
+        body message
 
-      elsif params[:client][:identifier].nil? || params[:client][:rootUrl].nil?
+      elsif params[:identifier].nil? || params[:rootUrl].nil?
         status 400
-        body "#{client.errors.full_messages.join(',')}"
+        body "#{client.errors.full_messages.join(', ')}"
 
       else #Client.find_by(:identifier => params[:client][:identifier])
         status 403
-        body "#{client.errors.full_messages.join(',')}"
+        body "#{client.errors.full_messages.join(', ')}"
       end
+    end
+
+    post '/sources/:identifier/data' do |identifier|
+      processor = PayloadProcessor.new(params[:payload], identifier)
+      message = processor.process_payload
+      status message[0]
+      body message[1]
     end
   end
 end

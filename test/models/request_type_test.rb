@@ -27,6 +27,7 @@ class RequestTypeTest < Minitest::Test
   def test_lists_all_request_types
     create_payloads(2)
 
-    assert_equal ["GET", "POST"], RequestType.list_all_verbs
+    assert RequestType.list_all_verbs.include?("GET")
+    assert RequestType.list_all_verbs.include?("POST")
   end
 end
