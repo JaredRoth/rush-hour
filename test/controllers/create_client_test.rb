@@ -12,7 +12,8 @@ class CreateClientTest < Minitest::Test
     post '/sources', { identifier: "yahoo", rootUrl: "http://yahoo.com" }
     assert_equal 1, Client.count
     assert_equal 200, last_response.status
-    assert_equal "{'identifier':'yahoo'}", last_response.body
+    assert_equal "{\"identifier\":\"yahoo\"}", last_response.body
+    # assert_equal "{'identifier':'yahoo'}", last_response.body
   end
 
   def test_cannot_create_client_that_already_exists
