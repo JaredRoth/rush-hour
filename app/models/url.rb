@@ -10,5 +10,4 @@ class Url < ActiveRecord::Base
   def self.sort_most_requested
     joins(:payload_requests).group(:url).order("count_all desc").count.keys
   end
-
 end
