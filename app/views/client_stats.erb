@@ -1,38 +1,48 @@
 <center><div class="Jumbotron"><h1><%= @client.identifier.capitalize %> Statistics</h1></div></center>
 
   <h3>Average Response Time Across All Requests:</h3>
-  <p><%= @client.avg_response_time %></p>
+  <p class="avg"><%= @client.avg_response_time %></p>
 
   <h3>Maximum Response Time Across All Requests:</h3>
-  <p><%= @client.max_response_time %></p>
+  <p class="max_time"><%= @client.max_response_time %></p>
 
   <h3>Minimum Response Time Across All Requests:</h3>
-  <p><%=@client.min_response_time %></p>
+  <p class="min_time"><%=@client.min_response_time %></p>
 
   <h3>Most Frequent Request Type:</h3>
-  <p><%=@client.clients_most_frequent_request_types %></p>
+  <p class="max_request"><%=@client.clients_most_frequent_request_types %></p>
 
   <h3>All HTTP Verbs Used:</h3>
+  <div class="requests">
     <% @client.all_request_types.each do |verb| %>
-        <p><%= verb %></p>
+    <p><%= verb %></p>
     <% end %>
+  </div>
 
   <h3>List of Urls From Most Requested to Least:</h3>
+  <div class="urls">
     <% @client.sort_clients_most_requested_urls.each do |url| %>
-        <p><%= url %></p>
+    <p><%= url %></p>
     <% end %>
+  </div>
 
   <h3>Web Browser Breakdown Across All Requests:</h3>
+  <div class="browsers">
     <% @client.clients_browser_breakdown.each do |browser| %>
-        <p><%= url %></p>
+    <p><%= browser %></p>
     <% end %>
+  </div>
 
   <h3>OS Breakdown Across All Requests:</h3>
-  <% @client.clients_operating_system_breakdown.each do |os| %>
-        <p><%= os %></p>
+  <div class="os">
+    <% @client.clients_operating_system_breakdown.each do |os| %>
+    <p><%= os %></p>
     <% end %>
+  </div>
 
   <h3>Screen Resolutions Across All Requests:</h3>
-  <% @client.list_clients_resolutions.each do |res| %>
-        <p><%= res %></p>
+  <div class="res">
+    <% @client.list_clients_resolutions.each do |res| %>
+    <p><%= res %></p>
     <% end %>
+  </div>
