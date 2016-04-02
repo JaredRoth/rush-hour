@@ -14,7 +14,7 @@ class ClientViewsTheirStatsTest < Minitest::Test
     end
 
     within '.avg' do
-      assert page.has_content? '37.67'
+      assert page.has_content? '37.0'
     end
 
     within '.max_time' do
@@ -59,7 +59,7 @@ class ClientViewsTheirStatsTest < Minitest::Test
     visit '/sources/jumpstartlab'
 
     within '.error' do
-      assert page.has_content? "There is no account registered under this name."
+      assert page.has_content? "Sorry, no account registered under this name."
       assert page.has_content? "Please register via curl request before proceeding."
     end
   end
@@ -69,7 +69,7 @@ class ClientViewsTheirStatsTest < Minitest::Test
     visit '/sources/jumpstartlab'
 
     within '.error' do
-      assert page.has_content? "There are no payloads recorded for your account."
+      assert page.has_content? "Sorry, no payloads associated with your account."
       assert page.has_content? "Please submit payloads via curl request to populate these statistics."
     end
   end

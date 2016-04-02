@@ -38,7 +38,7 @@ module TestHelpers
         :user_agent_browser => "Chrome",
         :event_name         => "thirdEvent",
         :request_type       => "POST",
-        :referred_by        => "http://apple.com",
+        :referred_by        => "http://google.com",
         :url                => "http://jumpstartlab.com/blog",
         :identifier         => "jumpstartlab",
         :rootUrl            => "http://jumpstartlab.com"
@@ -54,7 +54,7 @@ module TestHelpers
         :event_name         => "thirdEvent",
         :request_type       => "GET",
         :referred_by        => "http://apple.com",
-        :url                => "http://jumpstartlab.com/blog",
+        :url                => "http://yahoo.com/blog",
         :identifier         => "yahoo",
         :rootUrl            => "http://yahoo.com"
       },
@@ -68,10 +68,10 @@ module TestHelpers
         :user_agent_browser => "Firefox",
         :event_name         => "beginRegistration",
         :request_type       => "GET",
-        :referred_by        => "http://yahoo.com",
-        :url                => "http://yahoo.com/about",
-        :identifier         => "apple",
-        :rootUrl            => "http://apple.com"
+        :referred_by        => "http://google.com",
+        :url                => "http://jumpstartlab.com/about",
+        :identifier         => "jumpstartlab",
+        :rootUrl            => "http://jumpstartlab.com"
       },
       { :requested_at       => "2013-02-16 21:38:28 -0700",
         :responded_in       => 38,
@@ -82,8 +82,8 @@ module TestHelpers
         :user_agent_os      => "Windows",
         :user_agent_browser => "Safari",
         :event_name         => "beginRegistration",
-        :request_type       => "POST",
-        :referred_by        => "http://yahoo.com",
+        :request_type       => "GET",
+        :referred_by        => "http://google.com",
         :url                => "http://yahoo.com/about",
         :identifier         => "yahoo",
         :rootUrl            => "http://yahoo.com"
@@ -98,10 +98,10 @@ module TestHelpers
         :user_agent_browser => "Safari",
         :event_name         => "thirdEvent",
         :request_type       => "GET",
-        :referred_by        => "http://apple.com",
-        :url                => "http://yahoo.com/about",
-        :identifier         => "yahoo",
-        :rootUrl            => "http://yahoo.com"
+        :referred_by        => "http://jumpstartlab.com",
+        :url                => "http://jumpstartlab.com/blog",
+        :identifier         => "jumpstartlab",
+        :rootUrl            => "http://jumpstartlab.com"
       },
       { :requested_at       => "2013-02-16 21:38:28 -0700",
         :responded_in       => 35,
@@ -113,10 +113,10 @@ module TestHelpers
         :user_agent_browser => "Chrome",
         :event_name         => "socialLogin",
         :request_type       => "GET",
-        :referred_by        => "http://jumpstartlab.com",
-        :url                => "http://jumpstartlab.com/blog",
-        :identifier         => "jumpstartlab",
-        :rootUrl            => "http://jumpstartlab.com"
+        :referred_by        => "http://yahoo.com",
+        :url                => "http://yahoo.com/blog",
+        :identifier         => "yahoo",
+        :rootUrl            => "http://yahoo.com"
       },
       { :requested_at       => "2013-02-16 21:38:28 -0700",
         :responded_in       => 38,
@@ -128,10 +128,10 @@ module TestHelpers
         :user_agent_browser => "Chrome",
         :event_name         => "socialLogin",
         :request_type       => "GET",
-        :referred_by        => "http://apple.com",
+        :referred_by        => "http://jumpstartlab.com",
         :url                => "http://jumpstartlab.com/blog",
-        :identifier         => "yahoo",
-        :rootUrl            => "http://yahoo.com"
+        :identifier         => "jumpstartlab",
+        :rootUrl            => "http://jumpstartlab.com"
       },
       { :requested_at       => "2013-02-16 21:38:28 -0700",
         :responded_in       => 35,
@@ -143,8 +143,8 @@ module TestHelpers
         :user_agent_browser => "Safari",
         :event_name         => "socialLogin",
         :request_type       => "GET",
-        :referred_by        => "http://jumpstartlab.com",
-        :url                => "http://jumpstartlab.com/about",
+        :referred_by        => "http://google.com",
+        :url                => "http://jumpstartlab.com/apply",
         :identifier         => "jumpstartlab",
         :rootUrl            => "http://jumpstartlab.com"
       },
@@ -158,20 +158,22 @@ module TestHelpers
         :user_agent_browser => "Chrome",
         :event_name         => "socialLogin",
         :request_type       => "GET",
-        :referred_by        => "http://yahoo.com",
-        :url                => "http://jumpstartlab.com/blog",
+        :referred_by        => "http://jumpstartlab.com",
+        :url                => "http://jumpstartlab.com/about",
         :identifier         => "jumpstartlab",
         :rootUrl            => "http://jumpstartlab.com"
-      }]
+      },
+    ]
+
     num.times do |i|
-      ip                = Ip.find_or_create_by(:ip => params[i][:ip])
-      resolution        = Resolution.find_or_create_by(:resolution_width => params[i][:resolution_width], :resolution_height => params[i][:resolution_height])
-      user_agent_string = UserAgentString.find_or_create_by(:user_agent_os => params[i][:user_agent_os], :user_agent_browser => params[i][:user_agent_browser])
-      event             = Event.find_or_create_by(:event_name => params[i][:event_name])
-      request_type      = RequestType.find_or_create_by(:request_type => params[i][:request_type])
-      referrer          = Referrer.find_or_create_by(:referred_by => params[i][:referred_by])
-      url               = Url.find_or_create_by(:url => params[i][:url])
-      client            = Client.find_or_create_by(:identifier => params[i][:identifier], :rootUrl => params[i][:rootUrl])
+      ip                = Ip.find_or_create_by(ip: params[i][:ip])
+      resolution        = Resolution.find_or_create_by(resolution_width: params[i][:resolution_width], :resolution_height => params[i][:resolution_height])
+      user_agent_string = UserAgentString.find_or_create_by(user_agent_os: params[i][:user_agent_os], :user_agent_browser => params[i][:user_agent_browser])
+      event             = Event.find_or_create_by(event_name: params[i][:event_name])
+      request_type      = RequestType.find_or_create_by(request_type: params[i][:request_type])
+      referrer          = Referrer.find_or_create_by(referred_by: params[i][:referred_by])
+      url               = Url.find_or_create_by(url: params[i][:url])
+      client            = Client.find_or_create_by(identifier: params[i][:identifier], rootUrl: params[i][:rootUrl])
 
       PayloadRequest.create(
       :requested_at         => params[i][:requested_at],
@@ -189,3 +191,6 @@ module TestHelpers
     end
   end
 end
+
+
+# .match(/\w+\z/)[0],
