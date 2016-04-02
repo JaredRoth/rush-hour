@@ -8,8 +8,7 @@ class Url < ActiveRecord::Base
   has_many :user_agent_strings, through: :payload_requests
 
   def self.sort_most_requested
-    joins(:payload_requests).group(:url).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}
-    # check refactoring using order
+    joins(:payload_requests).group(:url).order("count_all desc").count.keys
   end
 
   # def urls_max_response_time

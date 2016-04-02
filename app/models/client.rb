@@ -1,15 +1,19 @@
-module RushHour
-  class Client < ActiveRecord::Base
-    include ModelStatistics
+require_relative 'model_statistics'
 
-    validates :identifier, presence: true, uniqueness: true
-    validates :rootUrl,    presence: true
+class Client < ActiveRecord::Base
+  include ModelStatistics
 
-    has_many :payload_requests
-    has_many :request_types, through: :payload_requests
-    has_many :user_agent_strings, through: :payload_request
-    has_many :urls, through: :payload_request
-    has_many :resolutions, through: :payload_request
+  validates :identifier, presence: true, uniqueness: true
+  validates :rootUrl,    presence: true
 
+  has_many :payload_requests
+  has_many :request_types, through: :payload_requests
+  has_many :user_agent_strings, through: :payload_requests
+  has_many :urls, through: :payload_requests
+  has_many :resolutions, through: :payload_requests
+
+  def sort_clients_most_requested_urls
+    urls.group(:url).order("count_all desc").count.keys
   end
+
 end

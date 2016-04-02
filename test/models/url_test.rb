@@ -81,7 +81,7 @@ class UrlTest < Minitest::Test
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal ["http://apple.com", "http://jumpstartlab.com", "http://yahoo.com"], url1.top_referrers
+    assert_equal ["http://apple.com", "http://jumpstartlab.com"], url1.top_referrers
     assert_equal ["http://yahoo.com", "http://apple.com"], url2.top_referrers
   end
 
@@ -91,7 +91,7 @@ class UrlTest < Minitest::Test
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal ["Chrome, Macintosh", "Safari, Macintosh", "Chrome, Windows"], url1.top_user_agents
+    assert_equal ["Chrome, Windows", "Chrome, Macintosh", "Safari, Macintosh"], url1.top_user_agents
     assert_equal ["Safari, Windows", "Firefox, Macintosh"], url2.top_user_agents
   end
 end
