@@ -1,48 +1,41 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title><%= "#{@client} Statistics" %>  </title>
-  </head>
+
   <body>
-    <h1><%= "#{@client} Statistics" %></h1>
+    <center><div class="Jumbotron"><h1><%= @client.identifier.capitalize %> Statistics</h1></div></center>
 
-      <%= "Average Response Time Across All Requests: #{@client.avg_response_time}"  %><br>
+      <h3>Average Response Time Across All Requests:</h3>
+        <p><%= @client.avg_response_time %></p>
 
-      <%= "Maximum Response Time Across All Requests: #{@client.max_response_time}"  %><br>
+      <h3>Maximum Response Time Across All Requests:</h3>
+        <p><%= @client.max_response_time %></p>
 
-      <%= "Minimum Response Time Across All Requests: #{@client.min_response_time}"  %><br>
+      <h3>Minimum Response Time Across All Requests:</h3>        <p><%=@client.min_response_time %></p>
 
-      <%= "Most Frequent Request Type: #{@client.clients_most_frequent_request_types}"  %><br>
+      <h3>Most Frequent Request Type:</h3>          <p><%=@client.clients_most_frequent_request_types %></p>
 
-      <h3>All HTTP Verbs Used:<h3>
-      <table class="table table-striped table-bordered table-hover col-md-12">
-        <tr>
-          <th class="text-center">Request Types</th>
-        </tr>
+      <h3>All HTTP Verbs Used:</h3>
         <% @client.all_request_types.each do |verb| %>
-          <tr class="text-center client">
-            <td><%= verb %></td>
-          </tr>
+            <p><%= verb %></p>
         <% end %>
-      </table>
 
-      <h3>List of Urls From Most Requested to Least:<h3>
-      <table class="table table-striped table-bordered table-hover col-md-12">
-        <tr>
-          <th class="text-center">Urls</th>
-        </tr>
-        <% @client.sort_clients_most_requested_urls.each do |verb| %>
-          <tr class="text-center client">
-            <td><%= verb %></td>
-          </tr>
+      <h3>List of Urls From Most Requested to Least:</h3>
+        <% @client.sort_clients_most_requested_urls.each do |url| %>
+            <td><%= url %></td><br>
         <% end %>
-      </table>
 
-      <%= "Web Browser Breakdown Across All Requests: #{@client.clients_browser_breakdown}"  %><br>
+      <h3>Web Browser Breakdown Across All Requests:</h3>
+        <% @client.clients_browser_breakdown.each do |browser| %>
+            <td><%= url %></td><br>
+        <% end %>
 
-      <%= "OS Breakdown Across All Requests: #{@client.clients_operating_system_breakdown}"  %><br>
+      <h3>OS Breakdown Across All Requests:</h3>
+      <% @client.clients_operating_system_breakdown.each do |os| %>
+            <td><%= os %></td><br>
+        <% end %>
 
-      <%= "Screen Resolutions Across All Requests: #{@client.list_clients_resolutions}"  %><br>
+      <h3>Screen Resolutions Across All Requests:</h3>
+      <% @client.list_clients_resolutions.each do |res| %>
+            <td><%= res %></td><br>
+        <% end %>
+
   </body>
 </html>
