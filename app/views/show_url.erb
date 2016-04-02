@@ -12,7 +12,7 @@
   <p class="avg_time"><%= @url.avg_response_time %></p>
 
   <h3>Resonse Times Across All Requests, Longest to Shortest:</h3>
-  <div class="ordered_responce_times">
+  <div class="ordered_response_times">
     <p><%= @url.sort_response_times.join(", ") %></p>
   </div>
 
@@ -31,7 +31,7 @@
   </div>
 
   <h3>Top 3 User Agents:</h3>
-  <div class="referrers">
+  <div class="user_agents">
     <% @url.top_user_agents.each do |ua| %>
     <p><%= ua %></p>
     <% end %>

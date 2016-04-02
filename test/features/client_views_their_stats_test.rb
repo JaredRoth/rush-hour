@@ -8,7 +8,7 @@ class ClientViewsTheirStatsTest < Minitest::Test
     create_payloads(5)
 
     visit '/sources/yahoo'
-save_and_open_page
+
     within 'h1' do
       assert page.has_content? 'Yahoo'
     end

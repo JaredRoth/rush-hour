@@ -1,8 +1,8 @@
 module RushHour
   class Server < Sinatra::Base
     helpers do
-      def link_to(identifier, relativepath, title)
-        "<a href='/sources/#{identifier}/urls/#{relativepath}'>#{title}</a>"
+      def link_to(identifier, relativepath, url)
+        "<a href='/sources/#{identifier}/urls/#{relativepath}'>#{url}</a>"
       end
 
       def client_url_path(url)
@@ -70,7 +70,7 @@ module RushHour
       @url = Url.find_by(url: build_client_url(identifier, relativepath))
 
       if @url.nil?
-        error = "Sorry, No Urls Associated With Your Account"
+        error = "Sorry, this Url is not associated with your account"
         erb :error, locals: {error: error}
 
       else
