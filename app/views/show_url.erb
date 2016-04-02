@@ -13,9 +13,7 @@
 
   <h3>Resonse Times Across All Requests, Longest to Shortest:</h3>
   <div class="ordered_responce_times">
-    <% @url.sort_response_times.each do |time| %>
-    <p><%= time %></p>
-    <% end %>
+    <p><%= @url.sort_response_times.join(", ") %></p>
   </div>
 
   <h3>All HTTP Verbs Used:</h3>
@@ -25,16 +23,16 @@
     <% end %>
   </div>
 
-    <h3>Top 3 Referrers:</h3>
+  <h3>Top 3 Referrers:</h3>
   <div class="referrers">
-    <p><%= @url.top_referrers[0] %></p>
-    <p><%= @url.top_referrers[1] %></p>
-    <p><%= @url.top_referrers[2] %></p>
+    <% @url.top_referrers.each do |ref| %>
+    <p><%= ref %></p>
+    <% end %>
   </div>
 
   <h3>Top 3 User Agents:</h3>
   <div class="referrers">
-    <p><%= @url.top_user_agents[0] %></p>
-    <p><%= @url.top_user_agents[1] %></p>
-    <p><%= @url.top_user_agents[2] %></p>
+    <% @url.top_user_agents.each do |ua| %>
+    <p><%= ua %></p>
+    <% end %>
   </div>
