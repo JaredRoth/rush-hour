@@ -20,9 +20,15 @@ class UrlTest < Minitest::Test
   end
 
   def test_sorts_urls_most_to_least_requested
-    create_payloads(6)
+    create_payloads(7)
 
-    assert_equal ["http://jumpstartlab.com/blog", "http://yahoo.com/blog", "http://yahoo.com/about", "http://jumpstartlab.com/about"], Url.sort_most_requested
+    assert_equal "http://jumpstartlab.com/blog", Url.sort_most_requested[0]
+
+    assert_equal "http://yahoo.com/blog", Url.sort_most_requested[1]
+
+    assert Url.sort_most_requested[2,3].include?("http://yahoo.com/about")
+
+    assert Url.sort_most_requested[2,3].include?("http://jumpstartlab.com/about")
   end
 
   def test_return_urls_maximum_response_time
@@ -93,5 +99,13 @@ class UrlTest < Minitest::Test
 
     assert_equal ["Chrome, Macintosh", "Safari, Windows", "Chrome, Windows"], url1.top_user_agents
     assert_equal ["Safari, Windows"], url2.top_user_agents
+  end
+
+  def test_returns_relative_path
+    create_payloads(1)
+
+    url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
+
+    assert_equal "blog", url1.get_relative_path
   end
 end

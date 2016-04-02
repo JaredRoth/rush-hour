@@ -163,6 +163,7 @@ module TestHelpers
         :identifier         => "jumpstartlab",
         :rootUrl            => "http://jumpstartlab.com"
       },
+
     ]
 
     num.times do |i|
