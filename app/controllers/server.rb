@@ -34,8 +34,9 @@ module RushHour
     end
 
     get '/sources/:identifier' do |identifier|
-      
-      # erb :show
+      @client = Client.find_by(identifier: identifier)
+      erb :client_stats
     end
+
   end
 end
