@@ -3,9 +3,10 @@ class RequestType < ActiveRecord::Base
 
   has_many :payload_requests
   has_many :urls, through: :payload_requests
+  has_many :clients, through: :payload_requests
 
-  def self.most_frequent
-    joins(:payload_requests).group(:request_type).count.max_by{|k,v|v}.first
+  def self.most_frequent_request_types
+    joins(:payload_requests).group(:request_type).order("count_all desc").count.keys.first
     # try to refactor using order
   end
 

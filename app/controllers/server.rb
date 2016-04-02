@@ -32,5 +32,10 @@ module RushHour
       status message[0]
       body message[1]
     end
+
+    get '/sources/:identifier' do |identifier|
+      
+      # erb :show
+    end
   end
 end

@@ -114,8 +114,8 @@ module TestHelpers
         :request_type       => "GET",
         :referred_by        => "http://jumpstartlab.com",
         :url                => "http://jumpstartlab.com/blog",
-        :identifier         => "yahoo",
-        :rootUrl            => "http://yahoo.com"
+        :identifier         => "jumpstartlab",
+        :rootUrl            => "http://jumpstartlab.com"
       },
       { :requested_at       => "2013-02-16 21:38:28 -0700",
         :responded_in       => 38,
@@ -143,9 +143,9 @@ module TestHelpers
         :event_name         => "socialLogin",
         :request_type       => "GET",
         :referred_by        => "http://jumpstartlab.com",
-        :url                => "http://jumpstartlab.com/blog",
-        :identifier         => "yahoo",
-        :rootUrl            => "http://yahoo.com"
+        :url                => "http://jumpstartlab.com/about",
+        :identifier         => "jumpstartlab",
+        :rootUrl            => "http://jumpstartlab.com"
       },
       { :requested_at       => "2013-02-16 21:38:28 -0700",
         :responded_in       => 39,
@@ -156,11 +156,11 @@ module TestHelpers
         :user_agent_os      => "Macintosh",
         :user_agent_browser => "Chrome",
         :event_name         => "socialLogin",
-        :request_type       => "POST",
+        :request_type       => "GET",
         :referred_by        => "http://yahoo.com",
         :url                => "http://jumpstartlab.com/blog",
-        :identifier         => "yahoo",
-        :rootUrl            => "http://yahoo.com"
+        :identifier         => "jumpstartlab",
+        :rootUrl            => "http://jumpstartlab.com"
       }]
     num.times do |i|
       ip                = Ip.find_or_create_by(:ip => params[i][:ip])

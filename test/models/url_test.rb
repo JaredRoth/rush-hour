@@ -31,58 +31,58 @@ class UrlTest < Minitest::Test
    url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
    url2 = Url.find_by(url: "http://yahoo.com/about")
 
-   assert_equal 36, url1.urls_max_response_time
-   assert_equal 38, url2.urls_max_response_time
+   assert_equal 36, url1.max_response_time
+   assert_equal 38, url2.max_response_time
   end
 
-  def test_return_urls_minimum_response_time
+  def test_return_minimum_response_time
     create_payloads(4)
 
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal 35, url1.urls_min_response_time
-    assert_equal 37, url2.urls_min_response_time
+    assert_equal 35, url1.min_response_time
+    assert_equal 37, url2.min_response_time
   end
 
-  def test_sorts_urls_response_times_longest_to_shortest
+  def test_sorts_response_times_longest_to_shortest
     create_payloads(5)
 
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal [36, 35], url1.sort_urls_response_times
-    assert_equal [39, 38, 37], url2.sort_urls_response_times
+    assert_equal [36, 35], url1.sort_response_times
+    assert_equal [39, 38, 37], url2.sort_response_times
   end
 
-  def test_returns_urls_avg_response_time
+  def test_returns_avg_response_time
     create_payloads(6)
 
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal 35.33, url1.urls_avg_response_time
-    assert_equal 38, url2.urls_avg_response_time
+    assert_equal 35.33, url1.avg_response_time
+    assert_equal 38, url2.avg_response_time
   end
 
-  def test_returns_list_of_urls_request_types
+  def test_returns_list_of_request_types
     create_payloads(4)
 
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal ["POST", "GET"], url1.urls_request_types
-    assert_equal ["GET", "POST"], url2.urls_request_types
+    assert_equal ["POST", "GET"], url1.all_request_types
+    assert_equal ["GET", "POST"], url2.all_request_types
   end
 
-  def test_returns_urls_top_three_referrers
+  def test_returns_top_three_referrers
     create_payloads(9)
 
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal ["http://apple.com", "http://jumpstartlab.com", "http://yahoo.com"], url1.urls_top_referrers
-    assert_equal ["http://yahoo.com", "http://apple.com"], url2.urls_top_referrers
+    assert_equal ["http://apple.com", "http://yahoo.com", "http://jumpstartlab.com"], url1.top_referrers
+    assert_equal ["http://yahoo.com", "http://apple.com"], url2.top_referrers
   end
 
   def test_returns_top_three_user_agents
@@ -91,7 +91,7 @@ class UrlTest < Minitest::Test
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
 
-    assert_equal ["Chrome, Macintosh", "Safari, Macintosh", "Chrome, Windows"], url1.urls_top_user_agents
-    assert_equal ["Safari, Windows", "Firefox, Macintosh"], url2.urls_top_user_agents
+    assert_equal ["Chrome, Macintosh", "Chrome, Windows", "Safari, Macintosh"], url1.top_user_agents
+    assert_equal ["Safari, Windows", "Firefox, Macintosh"], url2.top_user_agents
   end
 end
