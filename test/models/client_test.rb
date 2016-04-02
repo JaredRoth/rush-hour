@@ -79,4 +79,48 @@ class ClientTest < Minitest::Test
     assert_equal ["http://jumpstartlab.com/blog", "http://yahoo.com/about"], client2.sort_clients_most_requested_urls
   end
 
+  def test_lists_clients_browser_breakdown
+    create_payloads(9)
+
+    client1 = Client.find_by(identifier: "jumpstartlab")
+    client2 = Client.find_by(identifier: "yahoo")
+
+    assert_equal ["Chrome", "Safari"], client1.clients_browser_breakdown
+    assert_equal ["Safari", "Chrome"], client2.clients_browser_breakdown
+  end
+
+  def test_lists_clients_operating_system_breakdown
+    create_payloads(9)
+
+    client1 = Client.find_by(identifier: "jumpstartlab")
+    client2 = Client.find_by(identifier: "yahoo")
+
+    assert_equal ["Windows", "Macintosh"], client1.clients_operating_system_breakdown
+    assert_equal ["Macintosh", "Windows"], client2.clients_operating_system_breakdown
+  end
+
+  def test_displays_all_resolutions
+    create_payloads(9)
+
+    client1 = Client.find_by(identifier: "jumpstartlab")
+    client2 = Client.find_by(identifier: "yahoo")
+
+    ["1920x1280"].each do |res|
+      assert client1.list_clients_resolutions.include?(res)
+    end
+
+    ["720x500", "800x600", "1920x1280"].each do |res|
+      assert client2.list_clients_resolutions.include?(res)
+    end
+  end
+
+  def test_finds_clients_most_used_request_types
+    create_payloads(9)
+
+    client1 = Client.find_by(identifier: "jumpstartlab")
+    client2 = Client.find_by(identifier: "yahoo")
+
+    assert_equal "GET", client1.clients_most_frequent_request_types
+    assert_equal "GET", client2.clients_most_frequent_request_types
+  end
 end

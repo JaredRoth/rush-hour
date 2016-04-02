@@ -156,9 +156,9 @@ module TestHelpers
         :user_agent_os      => "Macintosh",
         :user_agent_browser => "Chrome",
         :event_name         => "socialLogin",
-        :request_type       => "POST",
+        :request_type       => "GET",
         :referred_by        => "http://yahoo.com",
-        :url                => "http://jumpstartlab.com/about",
+        :url                => "http://jumpstartlab.com/blog",
         :identifier         => "jumpstartlab",
         :rootUrl            => "http://jumpstartlab.com"
       }]
