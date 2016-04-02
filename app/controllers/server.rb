@@ -54,20 +54,5 @@ module RushHour
         erb :error, locals: {error: error}
 
       end
-
-    get '/sources/:identifier/urls/:relative_path' do |identifier|
-      if !Client.exists?(identifier: identifier)
-        error = "Not registered"
-        erb :error, locals: {error: error}
-
-      elsif PayloadRequest.exists?(client_id: Client.find_by(identifier: identifier).id)
-        @relative_path = Client.find_by(identifier: identifier).where(relative_path: relative_path)
-        erb :clients_specific_url_stats
-
-      else
-        error = "Sorry, No Urls Associated With Your Account"
-        erb :error, locals: {error: error}
-      end
-    end
   end
 end
