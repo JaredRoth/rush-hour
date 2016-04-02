@@ -25,4 +25,58 @@ class ClientTest < Minitest::Test
 
     assert_equal 0, Client.count
   end
+
+
+
+
+  def test_return_clients_maximum_response_time
+    create_payloads(4)
+
+    client1 = Client.find_by(identifier: "jumpstartlab")
+    client2 = Client.find_by(identifier: "yahoo")
+
+    assert_equal 36, client1.max_response_time
+    assert_equal 38, client2.max_response_time
+  end
+
+  def test_return_minimum_response_time
+    create_payloads(4)
+
+    client1 = Client.find_by(identifier: "jumpstartlab")
+    client2 = Client.find_by(identifier: "yahoo")
+
+    assert_equal 35, client1.min_response_time
+    assert_equal 37, client2.min_response_time
+  end
+
+  def test_sorts_response_times_longest_to_shortest
+    create_payloads(5)
+
+    client1 = Client.find_by(identifier: "jumpstartlab")
+    client2 = Client.find_by(identifier: "yahoo")
+
+    assert_equal [36, 35], client1.sort_response_times
+    assert_equal [39, 38, 37], client2.sort_response_times
+  end
+
+  def test_returns_avg_response_time
+    create_payloads(6)
+
+    client1 = Client.find_by(identifier: "jumpstartlab")
+    client2 = Client.find_by(identifier: "yahoo")
+
+    assert_equal 35.33, client1.avg_response_time
+    assert_equal 38, client2.avg_response_time
+  end
+
+  def test_returns_list_of_request_types
+    create_payloads(4)
+
+    client1 = Client.find_by(identifier: "jumpstartlab")
+    client2 = Client.find_by(identifier: "yahoo")
+
+    assert_equal ["POST", "GET"], client1.all_request_types
+    assert_equal ["GET", "POST"], client2.all_request_types
+  end
+
 end
