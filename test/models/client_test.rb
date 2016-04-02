@@ -35,7 +35,7 @@ class ClientTest < Minitest::Test
     client1 = Client.find_by(identifier: "jumpstartlab")
     client2 = Client.find_by(identifier: "yahoo")
 
-    assert_equal 35, client1.max_response_time
+    assert_equal 37, client1.max_response_time
     assert_equal 38, client2.max_response_time
   end
 
@@ -55,8 +55,8 @@ class ClientTest < Minitest::Test
     client1 = Client.find_by(identifier: "jumpstartlab")
     client2 = Client.find_by(identifier: "yahoo")
 
-    assert_equal 35, client1.avg_response_time
-    assert_equal 37.67, client2.avg_response_time
+    assert_equal 37, client1.avg_response_time
+    assert_equal 36.33, client2.avg_response_time
   end
 
   def test_returns_list_of_request_types
@@ -65,8 +65,11 @@ class ClientTest < Minitest::Test
     client1 = Client.find_by(identifier: "jumpstartlab")
     client2 = Client.find_by(identifier: "yahoo")
 
-    assert_equal ["POST"], client1.all_request_types
-    assert_equal ["GET", "POST"], client2.all_request_types
+    assert client1.all_request_types.include?("POST")
+    assert client1.all_request_types.include?("GET")
+
+    refute client2.all_request_types.include?("POST")
+    assert client2.all_request_types.include?("GET")
   end
 
   def test_sorts_clients_urls_most_to_least_requested
@@ -75,8 +78,8 @@ class ClientTest < Minitest::Test
     client1 = Client.find_by(identifier: "jumpstartlab")
     client2 = Client.find_by(identifier: "yahoo")
 
-    assert_equal ["http://jumpstartlab.com/blog", "http://jumpstartlab.com/about"], client1.sort_clients_most_requested_urls
-    assert_equal ["http://jumpstartlab.com/blog", "http://yahoo.com/about"], client2.sort_clients_most_requested_urls
+    assert_equal ["http://jumpstartlab.com/blog", "http://jumpstartlab.com/about", "http://jumpstartlab.com/apply"], client1.sort_clients_most_requested_urls
+    assert_equal ["http://yahoo.com/blog", "http://yahoo.com/about"], client2.sort_clients_most_requested_urls
   end
 
   def test_lists_clients_browser_breakdown
@@ -85,8 +88,12 @@ class ClientTest < Minitest::Test
     client1 = Client.find_by(identifier: "jumpstartlab")
     client2 = Client.find_by(identifier: "yahoo")
 
-    assert_equal ["Chrome", "Safari"], client1.clients_browser_breakdown
-    assert_equal ["Safari", "Chrome"], client2.clients_browser_breakdown
+    assert client1.clients_browser_breakdown.include?("Chrome")
+    assert client1.clients_browser_breakdown.include?("Safari")
+    assert client1.clients_browser_breakdown.include?("Firefox")
+
+    assert client2.clients_browser_breakdown.include?("Chrome")
+    assert client2.clients_browser_breakdown.include?("Safari")
   end
 
   def test_lists_clients_operating_system_breakdown
@@ -95,8 +102,11 @@ class ClientTest < Minitest::Test
     client1 = Client.find_by(identifier: "jumpstartlab")
     client2 = Client.find_by(identifier: "yahoo")
 
-    assert_equal ["Windows", "Macintosh"], client1.clients_operating_system_breakdown
-    assert_equal ["Macintosh", "Windows"], client2.clients_operating_system_breakdown
+    assert client1.clients_operating_system_breakdown.include?("Macintosh")
+    assert client1.clients_operating_system_breakdown.include?("Windows")
+
+    assert client2.clients_operating_system_breakdown.include?("Macintosh")
+    assert client2.clients_operating_system_breakdown.include?("Windows")
   end
 
   def test_displays_all_resolutions
