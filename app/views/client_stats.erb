@@ -1,41 +1,38 @@
+<center><div class="Jumbotron"><h1><%= @client.identifier.capitalize %> Statistics</h1></div></center>
 
-  <body>
-    <center><div class="Jumbotron"><h1><%= @client.identifier.capitalize %> Statistics</h1></div></center>
+  <h3>Average Response Time Across All Requests:</h3>
+  <p><%= @client.avg_response_time %></p>
 
-      <h3>Average Response Time Across All Requests:</h3>
-        <p><%= @client.avg_response_time %></p>
+  <h3>Maximum Response Time Across All Requests:</h3>
+  <p><%= @client.max_response_time %></p>
 
-      <h3>Maximum Response Time Across All Requests:</h3>
-        <p><%= @client.max_response_time %></p>
+  <h3>Minimum Response Time Across All Requests:</h3>
+  <p><%=@client.min_response_time %></p>
 
-      <h3>Minimum Response Time Across All Requests:</h3>        <p><%=@client.min_response_time %></p>
+  <h3>Most Frequent Request Type:</h3>
+  <p><%=@client.clients_most_frequent_request_types %></p>
 
-      <h3>Most Frequent Request Type:</h3>          <p><%=@client.clients_most_frequent_request_types %></p>
+  <h3>All HTTP Verbs Used:</h3>
+    <% @client.all_request_types.each do |verb| %>
+        <p><%= verb %></p>
+    <% end %>
 
-      <h3>All HTTP Verbs Used:</h3>
-        <% @client.all_request_types.each do |verb| %>
-            <p><%= verb %></p>
-        <% end %>
+  <h3>List of Urls From Most Requested to Least:</h3>
+    <% @client.sort_clients_most_requested_urls.each do |url| %>
+        <p><%= url %></p>
+    <% end %>
 
-      <h3>List of Urls From Most Requested to Least:</h3>
-        <% @client.sort_clients_most_requested_urls.each do |url| %>
-            <td><%= url %></td><br>
-        <% end %>
+  <h3>Web Browser Breakdown Across All Requests:</h3>
+    <% @client.clients_browser_breakdown.each do |browser| %>
+        <p><%= url %></p>
+    <% end %>
 
-      <h3>Web Browser Breakdown Across All Requests:</h3>
-        <% @client.clients_browser_breakdown.each do |browser| %>
-            <td><%= url %></td><br>
-        <% end %>
+  <h3>OS Breakdown Across All Requests:</h3>
+  <% @client.clients_operating_system_breakdown.each do |os| %>
+        <p><%= os %></p>
+    <% end %>
 
-      <h3>OS Breakdown Across All Requests:</h3>
-      <% @client.clients_operating_system_breakdown.each do |os| %>
-            <td><%= os %></td><br>
-        <% end %>
-
-      <h3>Screen Resolutions Across All Requests:</h3>
-      <% @client.list_clients_resolutions.each do |res| %>
-            <td><%= res %></td><br>
-        <% end %>
-
-  </body>
-</html>
+  <h3>Screen Resolutions Across All Requests:</h3>
+  <% @client.list_clients_resolutions.each do |res| %>
+        <p><%= res %></p>
+    <% end %>
