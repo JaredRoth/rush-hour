@@ -11,6 +11,7 @@ class Client < ActiveRecord::Base
   has_many :user_agent_strings, through: :payload_requests
   has_many :urls, through: :payload_requests
   has_many :resolutions, through: :payload_requests
+  has_many :events, through: :payload_requests
 
   def clients_most_frequent_request_types
     request_types.group(:request_type).order("count_all desc").count.keys.first

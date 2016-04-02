@@ -25,4 +25,18 @@ class EventTest < Minitest::Test
 
     assert_equal ["thirdEvent", "beginRegistration", "socialLogin"], Event.sort_most_received
   end
+
+  def test_returns_hash_of_hourly_data
+    create_payloads(9)
+
+    event = Event.find_by(event_name: 'thirdEvent')
+    times = {3.0=>1, 4.0=>1, 6.0=>1}
+
+    assert_equal times, event.hourly_requests
+  end
+
+  def test_returns_total_count_events
+    create_payloads(6)
+
+  end
 end

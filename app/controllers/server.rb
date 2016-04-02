@@ -74,8 +74,22 @@ module RushHour
         erb :error, locals: {error: error}
 
       else
-
         erb :show_url
+
+      end
+    end
+
+    get '/sources/:identifier/events/:eventname' do |identifier, eventname|
+      @event = Event.find_by(event_name: eventname)
+
+      if @event.nil?
+        error = "Sorry, No Events Associated With Your Account"
+        erb :error, locals: {error: error}
+
+      else
+        hours_hash = @event.hourly_requests
+        erb :show_event, locals: {hours_hash: hours_hash}
+
       end
     end
   end

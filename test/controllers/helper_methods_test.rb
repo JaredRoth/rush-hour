@@ -10,6 +10,7 @@ class HelperMethodsTest < Minitest::Test
   end
 
   def test_link_to_assembles_link
+    skip
     identifier = "jumpstartlab"
     relativepath = 'blog'
     url = "http://jumpstartlab.com/blog"

@@ -1,13 +1,12 @@
 <center><div class="Jumbotron">
-  <h1><%= @event.event_name.capitalize %> Statistics for <%= @client.event_name %><br>Hourly Breakdown: </h1>
+  <h1><%= @event.event_name %><br>Hourly Breakdown:</h1>
 </div></center>
 
-  <h3><%= @client.event_name.requested_at.each do |event, hour|%></h3>
-  <h3>12 am</h3>Hour name
-  event_name.count
-  <p class="12 am"><%= @client.event_name.requested_at %></p>
+  <h3>Hourly Breakdown:</h3>
+  <% 24.times do |hour|%>
+    <p class="hourly_count">
+      <%= "#{hour} : #{hours_hash[hour.to_f]}"%></p>
+  <% end %>
 
-
-  <!-- hash, key is hour, value is the count -->
-  <!-- overall count on all hours method call -->
-  <!-- create another route -->
+  <h3>Total Number of Times Event Was Recieved:</h3>
+  <p class="event_total_count"><%= @event.total_count %></p>
