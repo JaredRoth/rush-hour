@@ -34,9 +34,19 @@ module RushHour
     end
 
     get '/sources/:identifier' do |identifier|
-      @client = Client.find_by(identifier: identifier)
-      erb :client_stats
-    end
+      if !Client.exists?(identifier: identifier)
+        error = "Not registered"
+        erb :error, locals: {error: error}
 
+      elsif PayloadRequest.exists?(client_id: Client.find_by(identifier: identifier).id)
+        @client = Client.find_by(identifier: identifier)
+        erb :client_stats
+
+      else
+        error = "No payloads"
+        erb :error, locals: {error: error}
+
+      end
+    end
   end
 end
