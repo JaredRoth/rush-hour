@@ -1,8 +1,19 @@
 module RushHour
   class Server < Sinatra::Base
+    helpers do
+      def link_to(identifier, relativepath, title)
+        "<a href='/#{identifier}/urls/#{relativepath}'>#{title}</a>"
+      end
+
+      def client_url_path(url)
+         url.match(/\w+\z/)[0]
+      end
+    end
+
     not_found do
       erb :error
     end
+
 
     get '/' do
       erb :index
@@ -40,7 +51,7 @@ module RushHour
 
       elsif PayloadRequest.exists?(client_id: Client.find_by(identifier: identifier).id)
         @client = Client.find_by(identifier: identifier)
-        erb :client_stats
+        erb :client_stats, locals: {identifier: identifier}
 
       else
         error = "Sorry, no payloads associated with your account.</p><p>Please submit payloads via curl request to populate these statistics."
@@ -49,16 +60,16 @@ module RushHour
       end
     end
 
-    get '/sources/:identifier/urls/:relativepath' do |identifier, realtivepath|
-      require 'pry'; binding.pry
-      if # Url.where("url REGEXP ?", '\w+\z')
-        erb :show_url
-
-      else
-        error = "Sorry, No Urls Associated With Your Account"
-        erb :error, locals: {error: error}
-
-      end
+    get '/sources/:identifier/urls/:relativepath' do |identifier, relativepath|
+      # require 'pry'; binding.pry
+      # if # Url.where("url REGEXP ?", '\w+\z')
+      #   erb :show_url
+      #
+      # else
+      #   error = "Sorry, No Urls Associated With Your Account"
+      #   erb :error, locals: {error: error}
+      #
+      # end
     end
   end
 end

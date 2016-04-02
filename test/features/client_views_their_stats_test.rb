@@ -8,7 +8,7 @@ class ClientViewsTheirStatsTest < Minitest::Test
     create_payloads(5)
 
     visit '/sources/yahoo'
-
+save_and_open_page
     within 'h1' do
       assert page.has_content? 'Yahoo'
     end
@@ -18,7 +18,7 @@ class ClientViewsTheirStatsTest < Minitest::Test
     end
 
     within '.max_time' do
-      assert page.has_content? '39'
+      assert page.has_content? '38'
     end
 
     within '.min_time' do
@@ -31,12 +31,11 @@ class ClientViewsTheirStatsTest < Minitest::Test
 
     within '.requests' do
       assert page.has_content? 'GET'
-      assert page.has_content? 'POST'
     end
 
     within '.urls' do
+      assert page.has_content? 'http://yahoo.com/blog'
       assert page.has_content? 'http://yahoo.com/about'
-      assert page.has_content? 'http://jumpstartlab.com/blog'
     end
 
     within '.browsers' do
@@ -51,7 +50,6 @@ class ClientViewsTheirStatsTest < Minitest::Test
     within '.res' do
       assert page.has_content? '720x500'
       assert page.has_content? '800x600'
-      assert page.has_content? '1920x1280'
     end
   end
 
