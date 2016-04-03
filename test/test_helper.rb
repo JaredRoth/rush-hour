@@ -28,7 +28,7 @@ module TestHelpers
 
   def create_payloads(num)
     params = [
-      { :requested_at       => "2013-02-16 21:38:28 -0700",
+      { :requested_at       => "2013-02-16 20:37:28 -0700",
         :responded_in       => 35,
         :payload_sha        => "0a86d98f1910279f82a56fc686b79c4cd5cb4fa5",
         :ip                 => "63.29.38.213",
@@ -58,7 +58,7 @@ module TestHelpers
         :identifier         => "yahoo",
         :rootUrl            => "http://yahoo.com"
       },
-      { :requested_at       => "2013-02-16 21:38:28 -0700",
+      { :requested_at       => "2013-02-16 22:38:28 -0700",
         :responded_in       => 37,
         :payload_sha        => "2c86d98f1910279f82a56fc686b79c4cd5cb4fa5",
         :ip                 => "63.29.38.211",
@@ -73,7 +73,7 @@ module TestHelpers
         :identifier         => "jumpstartlab",
         :rootUrl            => "http://jumpstartlab.com"
       },
-      { :requested_at       => "2013-02-16 21:38:28 -0700",
+      { :requested_at       => "2013-02-16 22:30:28 -0700",
         :responded_in       => 38,
         :payload_sha        => "3d86d98f1910279f82a56fc686b79c4cd5cb4fa5",
         :ip                 => "63.29.38.212",
@@ -88,7 +88,7 @@ module TestHelpers
         :identifier         => "yahoo",
         :rootUrl            => "http://yahoo.com"
       },
-      { :requested_at       => "2013-02-16 21:38:28 -0700",
+      { :requested_at       => "2013-02-16 23:38:28 -0700",
         :responded_in       => 39,
         :payload_sha        => "4e86d98f1910279f82a56fc686b79c4cd5cb4fa5",
         :ip                 => "63.29.38.211",
@@ -103,7 +103,7 @@ module TestHelpers
         :identifier         => "jumpstartlab",
         :rootUrl            => "http://jumpstartlab.com"
       },
-      { :requested_at       => "2013-02-16 21:38:28 -0700",
+      { :requested_at       => "2013-02-16 23:30:28 -0700",
         :responded_in       => 35,
         :payload_sha        => "5f86d98f1910279f82a56fc686b79c4cd5cb4fa5",
         :ip                 => "63.29.38.211",
@@ -118,7 +118,7 @@ module TestHelpers
         :identifier         => "yahoo",
         :rootUrl            => "http://yahoo.com"
       },
-      { :requested_at       => "2013-02-16 21:38:28 -0700",
+      { :requested_at       => "2013-02-16 19:38:28 -0700",
         :responded_in       => 38,
         :payload_sha        => "6e86d98f1910279f82a56fc686b79c4cd5cb4fa5",
         :ip                 => "63.29.38.211",
@@ -133,7 +133,7 @@ module TestHelpers
         :identifier         => "jumpstartlab",
         :rootUrl            => "http://jumpstartlab.com"
       },
-      { :requested_at       => "2013-02-16 21:38:28 -0700",
+      { :requested_at       => "2013-02-16 12:38:28 -0700",
         :responded_in       => 35,
         :payload_sha        => "7686d98f1910279f82a56fc686b79c4cd5cb4fa5",
         :ip                 => "63.29.38.211",
@@ -148,7 +148,7 @@ module TestHelpers
         :identifier         => "jumpstartlab",
         :rootUrl            => "http://jumpstartlab.com"
       },
-      { :requested_at       => "2013-02-16 21:38:28 -0700",
+      { :requested_at       => "2013-02-16 19:38:28 -0700",
         :responded_in       => 39,
         :payload_sha        => "8e86d98f1910279f82a56fc686b79c4cd5cb4fa5",
         :ip                 => "63.29.38.211",
@@ -167,14 +167,14 @@ module TestHelpers
     ]
 
     num.times do |i|
-      ip                = Ip.find_or_create_by(ip: params[i][:ip])
-      resolution        = Resolution.find_or_create_by(resolution_width: params[i][:resolution_width], :resolution_height => params[i][:resolution_height])
-      user_agent_string = UserAgentString.find_or_create_by(user_agent_os: params[i][:user_agent_os], :user_agent_browser => params[i][:user_agent_browser])
-      event             = Event.find_or_create_by(event_name: params[i][:event_name])
-      request_type      = RequestType.find_or_create_by(request_type: params[i][:request_type])
-      referrer          = Referrer.find_or_create_by(referred_by: params[i][:referred_by])
-      url               = Url.find_or_create_by(url: params[i][:url])
-      client            = Client.find_or_create_by(identifier: params[i][:identifier], rootUrl: params[i][:rootUrl])
+      ip                = Ip.where(ip: params[i][:ip]).first_or_create
+      resolution        = Resolution.where(resolution_width: params[i][:resolution_width], :resolution_height => params[i][:resolution_height]).first_or_create
+      user_agent_string = UserAgentString.where(user_agent_os: params[i][:user_agent_os], :user_agent_browser => params[i][:user_agent_browser]).first_or_create
+      event             = Event.where(event_name: params[i][:event_name]).first_or_create
+      request_type      = RequestType.where(request_type: params[i][:request_type]).first_or_create
+      referrer          = Referrer.where(referred_by: params[i][:referred_by]).first_or_create
+      url               = Url.where(url: params[i][:url]).first_or_create
+      client            = Client.where(identifier: params[i][:identifier], rootUrl: params[i][:rootUrl]).first_or_create
 
       PayloadRequest.create(
       :requested_at         => params[i][:requested_at],
@@ -192,6 +192,3 @@ module TestHelpers
     end
   end
 end
-
-
-# .match(/\w+\z/)[0],

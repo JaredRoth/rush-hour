@@ -26,9 +26,6 @@ class ClientTest < Minitest::Test
     assert_equal 0, Client.count
   end
 
-
-
-
   def test_return_clients_maximum_response_time
     create_payloads(4)
 
@@ -130,7 +127,7 @@ class ClientTest < Minitest::Test
     client1 = Client.find_by(identifier: "jumpstartlab")
     client2 = Client.find_by(identifier: "yahoo")
 
-    assert_equal "GET", client1.clients_most_frequent_request_types
-    assert_equal "GET", client2.clients_most_frequent_request_types
+    assert_equal "GET", client1.clients_most_frequent_request_type
+    assert_equal "GET", client2.clients_most_frequent_request_type
   end
 end

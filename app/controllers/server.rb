@@ -1,12 +1,13 @@
 module RushHour
   class Server < Sinatra::Base
     helpers do
-      def link_to(identifier, relativepath, title)
-        "<a href='/sources/#{identifier}/urls/#{relativepath}'>#{title}</a>"
+      def link_to(identifier, relativepath, url)
+        "<a href='/sources/#{identifier}/urls/#{relativepath}'>#{url}</a>"
       end
 
       def client_url_path(url)
-         url.match(/\w+\z/)[0]
+        url.match(/\b\/\K\S+/)[0]
+        # url.match(/\w+\z/)[0]
       end
 
       def build_client_url(identifier, relativepath)
@@ -70,12 +71,26 @@ module RushHour
       @url = Url.find_by(url: build_client_url(identifier, relativepath))
 
       if @url.nil?
-        error = "Sorry, No Urls Associated With Your Account"
+        error = "Sorry, this Url is not associated with your account"
         erb :error, locals: {error: error}
 
       else
-
         erb :show_url
+
+      end
+    end
+
+    get '/sources/:identifier/events/:eventname' do |identifier, eventname|
+      @event = Event.find_by(event_name: eventname)
+
+      if @event.nil?
+        error = "Sorry, No Events Associated With Your Account"
+        erb :error, locals: {error: error}
+
+      else
+        hours_hash = @event.hourly_requests
+        erb :show_event, locals: {hours_hash: hours_hash}
+
       end
     end
   end

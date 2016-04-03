@@ -20,7 +20,7 @@ class PayloadRequestTest < Minitest::Test
 
     assert_equal 1, request.id
     assert_equal 35,request.responded_in
-    assert_equal DateTime.parse("2013-02-16 21:38:28 -0700"), request.requested_at
+    assert_equal DateTime.parse("2013-02-16 20:37:28 -0700"), request.requested_at
     assert_equal '0a86d98f1910279f82a56fc686b79c4cd5cb4fa5', request.payload_sha
     assert_equal 1, request.ip_id
     assert_equal 1, request.resolution_id

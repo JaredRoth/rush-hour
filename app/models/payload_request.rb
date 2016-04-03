@@ -21,8 +21,7 @@ class PayloadRequest < ActiveRecord::Base
   belongs_to :client
 
   def self.avg_response_time
-    average(:responded_in).to_f.round(2)
-    # check to see if AR provides rounding
+    average(:responded_in).round(2)
   end
 
   def self.min_response_time
