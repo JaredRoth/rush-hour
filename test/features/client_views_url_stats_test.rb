@@ -7,7 +7,13 @@ class ClientViewsUrlStatsTest < Minitest::Test
   def test_client_can_view_urls_stats
     create_payloads(7)
 
-    visit '/sources/jumpstartlab/urls/blog'
+    visit '/sources/jumpstartlab'
+
+    assert_equal '/sources/jumpstartlab', current_path
+
+    first(:link, "http://jumpstartlab.com/blog").click
+
+    assert_equal '/sources/jumpstartlab/urls/blog', current_path
 
     within 'h1' do
       assert page.has_content? 'jumpstartlab'
@@ -40,22 +46,21 @@ class ClientViewsUrlStatsTest < Minitest::Test
     end
 
     within '.user_agents' do
-      assert page.has_content? ["Chrome", "Macintosh"]
-      assert page.has_content? ["Safari", "Windows"]
-      assert page.has_content? ["Chrome", "Windows"]
-
-      # assert page.has_content? 'Chrome, Macintosh'
-      # assert page.has_content? 'Safari, Windows'
-      # assert page.has_content? 'Chrome, Windows'
+      assert page.has_content? 'Chrome, Macintosh'
+      assert page.has_content? 'Safari, Windows'
+      assert page.has_content? 'Chrome, Windows'
     end
   end
 
   def test_client_sees_no_urls_error_page
     Client.create(identifier: 'jumpstartlab', rootUrl: "http://jumpstartlab.com")
+
     visit '/sources/jumpstartlab/urls/blog'
 
+    assert_equal '/sources/jumpstartlab/urls/blog', current_path
+
     within '.error' do
-      assert page.has_content? "Sorry, this Url is not associated with your account"
+      assert page.has_content? "Sorry, this Url is not associated with your account. "
     end
   end
 end

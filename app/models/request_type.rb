@@ -6,7 +6,8 @@ class RequestType < ActiveRecord::Base
   has_many :clients, through: :payload_requests
 
   def self.most_frequent_request_type
-    joins(:payload_requests).group(:request_type).order("count_all desc").count.keys.first
+    joins(:payload_requests).group(:request_type)
+    .order("count_all desc").count.keys.first
   end
 
   def self.list_all_verbs

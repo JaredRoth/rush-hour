@@ -130,4 +130,14 @@ class ClientTest < Minitest::Test
     assert_equal "GET", client1.clients_most_frequent_request_type
     assert_equal "GET", client2.clients_most_frequent_request_type
   end
+
+  def test_lists_clients_events
+    create_payloads(6)
+
+    client1 = Client.find_by(identifier: "jumpstartlab")
+    client2 = Client.find_by(identifier: "yahoo")
+
+    assert_equal ["thirdEvent", "beginRegistration"], client1.list_clients_events
+    assert_equal ["thirdEvent", "beginRegistration", "socialLogin"], client2.list_clients_events
+  end
 end

@@ -9,6 +9,8 @@ class ClientViewsTheirStatsTest < Minitest::Test
 
     visit '/sources/yahoo'
 
+    assert_equal '/sources/yahoo', current_path
+
     within 'h1' do
       assert page.has_content? 'Yahoo'
     end
@@ -56,9 +58,11 @@ class ClientViewsTheirStatsTest < Minitest::Test
   def test_client_sees_not_registered_error_page
     visit '/sources/jumpstartlab'
 
+    assert_equal '/sources/jumpstartlab', current_path
+
     within '.error' do
       assert page.has_content? "Sorry, no account registered under this name."
-      assert page.has_content? "Please register via curl request before proceeding."
+      assert page.has_content? "Please register via curl request before proceeding. "
     end
   end
 
@@ -66,9 +70,11 @@ class ClientViewsTheirStatsTest < Minitest::Test
     Client.create(identifier: 'jumpstartlab', rootUrl: "http://yahoo.com")
     visit '/sources/jumpstartlab'
 
+    assert_equal '/sources/jumpstartlab', current_path
+
     within '.error' do
       assert page.has_content? "Sorry, no payloads associated with your account."
-      assert page.has_content? "Please submit payloads via curl request to populate these statistics."
+      assert page.has_content? "Please submit payloads via curl request to populate these statistics. "
     end
   end
 end

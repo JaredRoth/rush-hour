@@ -23,7 +23,8 @@ class EventTest < Minitest::Test
   def test_sorts_events_most_to_least_received
     create_payloads(6)
 
-    assert_equal ["thirdEvent", "beginRegistration", "socialLogin"], Event.sort_most_received
+    assert_equal ["thirdEvent", "beginRegistration", "socialLogin"],
+        Event.sort_most_received
   end
 
   def test_returns_hash_of_hourly_data

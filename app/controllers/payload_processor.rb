@@ -17,16 +17,16 @@ class PayloadProcessor
   def process_payload
     payload = create_payload
     if payload.save
-      [200, "Success"]
+      [200, "Your submission was successful. "]
 
     elsif parsed_payload.empty?
-      [400, "#{payload.errors.full_messages.join(', ')}"]
+      [400, "#{payload.errors.full_messages.join(', ')}. "]
 
     elsif !Client.exists?(identifier: identifier)
-      [403, "Client is not registered"]
+      [403, "Client is not registered. "]
 
     else #PayloadRequest.exists?(payload_sha: Digest::SHA1.hexdigest(json_payload))
-      [403, "#{payload.errors.full_messages.join(', ')}"]
+      [403, "#{payload.errors.full_messages.join(', ')}. "]
     end
   end
 
