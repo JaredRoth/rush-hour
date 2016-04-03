@@ -28,4 +28,8 @@ module ModelStatistics
     user_agent_strings.group(:user_agent_browser, :user_agent_os).order("count_all desc").limit(3).count.keys
     # user_agent_strings.user_agent.group_by{|i|i}.sort_by{|k,v| v.count}.reverse.map{|pair| pair[0]}[0..2]
   end
+
+  def get_relative_path(url)
+    url.match(/\b\/\K\S+/)[0]
+  end
 end

@@ -22,7 +22,7 @@
   <h3>List of Urls From Most Requested to Least:</h3>
   <div class="urls">
     <% @client.sort_clients_most_requested_urls.each do |url| %>
-    <p><%= link_to(identifier, client_url_path(url), url) %></p>
+    <p><%= link_to(identifier, get_relative_path(url), url) %></p>
     <% end %>
   </div>
 

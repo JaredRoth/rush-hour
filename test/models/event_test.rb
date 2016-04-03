@@ -31,6 +31,7 @@ class EventTest < Minitest::Test
 
     event1 = Event.find_by(event_name: 'thirdEvent')
     event2 = Event.find_by(event_name: 'socialLogin')
+
     times1 = {3.0=>1, 4.0=>1, 6.0=>1}
     times2 = {6.0=>1, 19.0=>1, 2.0=>2}
 

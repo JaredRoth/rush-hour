@@ -5,10 +5,10 @@ module RushHour
         "<a href='/sources/#{identifier}/urls/#{relativepath}'>#{url}</a>"
       end
 
-      def client_url_path(url)
-        url.match(/\b\/\K\S+/)[0]
-        # url.match(/\w+\z/)[0]
-      end
+      # def get_relative_path(url)
+      #   url.match(/\b\/\K\S+/)[0]
+      #   # url.match(/\w+\z/)[0]
+      # end
 
       def build_client_url(identifier, relativepath)
         "http://#{identifier}.com/#{relativepath}"
