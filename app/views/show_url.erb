@@ -25,14 +25,14 @@
 
   <h3>Top 3 Referrers:</h3>
   <div class="referrers">
-    <% @url.top_referrers.each do |ref| %>
+    <% @url.top_three_referrers.each do |ref| %>
     <p><%= ref %></p>
     <% end %>
   </div>
 
   <h3>Top 3 User Agents:</h3>
   <div class="user_agents">
-    <% @url.top_user_agents.each do |ua| %>
-    <p><%= ua %></p>
+    <% @url.top_three_user_agents.each do |ua| %>
+    <p><%= ua.join(", ") %></p>
     <% end %>
   </div>

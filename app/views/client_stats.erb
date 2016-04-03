@@ -22,7 +22,7 @@
   <h3>List of Urls From Most Requested to Least:</h3>
   <div class="urls">
     <% @client.sort_clients_most_requested_urls.each do |url| %>
-    <p><%= link_to(identifier, client_url_path(url), url) %></p>
+    <p><%= link_to_url(identifier, url) %></p>
     <% end %>
   </div>
 
@@ -46,3 +46,10 @@
     <p><%= res %></p>
     <% end %>
   </div>
+
+<h3>Events:</h3>
+<div class="events">
+  <% @client.list_clients_events.each do |event| %>
+  <p><%= link_to_event(identifier, event) %></p>
+  <% end %>
+</div>

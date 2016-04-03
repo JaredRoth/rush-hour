@@ -30,10 +30,15 @@ class Client < ActiveRecord::Base
   end
 
   def list_clients_resolutions
-    client_resolutions = resolutions.pluck(:resolution_width, :resolution_height).uniq
+    client_resolutions = resolutions.pluck(:resolution_width,
+                                           :resolution_height).uniq
 
     client_resolutions.map do |width, height|
         width.to_s + 'x' + height.to_s
     end
+  end
+
+  def list_clients_events
+    events.pluck(:event_name).uniq
   end
 end

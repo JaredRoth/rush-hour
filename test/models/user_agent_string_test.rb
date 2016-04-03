@@ -33,13 +33,4 @@ class UserAgentStringTest < Minitest::Test
 
     assert_equal ["Windows", "Macintosh"], UserAgentString.operating_system_breakdown
   end
-
-  # def test_returns_all_user_agents_as_strings
-  #   create_payloads(3)
-  #
-  #   assert_equal ["Chrome, Windows",
-  #                 "Safari, Macintosh",
-  #                 "Firefox, Macintosh"],
-  #     UserAgentString.user_agent
-  # end
 end
