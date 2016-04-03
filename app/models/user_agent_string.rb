@@ -13,8 +13,8 @@ class UserAgentString < ActiveRecord::Base
     pluck(:user_agent_os).uniq
   end
 
-  def self.user_agent
-    pairs = pluck(:user_agent_browser, :user_agent_os)
-    pairs.map { |browser, os| browser + ", " + os}
-  end
+  # def self.user_agent
+  #   pairs = pluck(:user_agent_browser, :user_agent_os)
+  #   pairs.map { |browser, os| browser + ", " + os}
+  # end
 end

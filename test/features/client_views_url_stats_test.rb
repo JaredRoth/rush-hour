@@ -14,7 +14,6 @@ class ClientViewsUrlStatsTest < Minitest::Test
     end
 
     within '.avg_time' do
-      # save_and_open_page
       assert page.has_content? '37.33'
     end
 
@@ -41,9 +40,13 @@ class ClientViewsUrlStatsTest < Minitest::Test
     end
 
     within '.user_agents' do
-      assert page.has_content? 'Chrome, Macintosh'
-      assert page.has_content? 'Safari, Windows'
-      assert page.has_content? 'Chrome, Windows'
+      assert page.has_content? ["Chrome", "Macintosh"]
+      assert page.has_content? ["Safari", "Windows"]
+      assert page.has_content? ["Chrome", "Windows"]
+
+      # assert page.has_content? 'Chrome, Macintosh'
+      # assert page.has_content? 'Safari, Windows'
+      # assert page.has_content? 'Chrome, Windows'
     end
   end
 

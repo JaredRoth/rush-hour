@@ -13,7 +13,7 @@ class Client < ActiveRecord::Base
   has_many :resolutions, through: :payload_requests
   has_many :events, through: :payload_requests
 
-  def clients_most_frequent_request_types
+  def clients_most_frequent_request_type
     request_types.group(:request_type).order("count_all desc").count.keys.first
   end
 

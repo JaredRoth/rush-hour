@@ -6,7 +6,8 @@ module RushHour
       end
 
       def client_url_path(url)
-         url.match(/\w+\z/)[0]
+        url.match(/\b\/\K\S+/)[0]
+        # url.match(/\w+\z/)[0]
       end
 
       def build_client_url(identifier, relativepath)

@@ -2,7 +2,6 @@ module ModelStatistics
 
   def max_response_time
     payload_requests.maximum(:responded_in)
-    # payload_requests.max_response_time
   end
 
   def min_response_time
@@ -14,7 +13,7 @@ module ModelStatistics
   end
 
   def avg_response_time
-    payload_requests.average(:responded_in).to_f.round(2)
+    payload_requests.average(:responded_in).round(2)
   end
 
   def all_request_types
@@ -22,11 +21,11 @@ module ModelStatistics
   end
 
   def top_referrers
-    referrers.group(:referred_by).count.sort_by{|k,v|v}.reverse.map{|pair| pair[0]}[0..2]
-    # check order
+    referrers.group(:referred_by).order("count_all desc").count.keys
   end
 
   def top_user_agents
-    user_agent_strings.user_agent.group_by{|i|i}.sort_by{|k,v| v.count}.reverse.map{|pair| pair[0]}[0..2]
+    user_agent_strings.group(:user_agent_browser, :user_agent_os).order("count_all desc").limit(3).count.keys
+    # user_agent_strings.user_agent.group_by{|i|i}.sort_by{|k,v| v.count}.reverse.map{|pair| pair[0]}[0..2]
   end
 end

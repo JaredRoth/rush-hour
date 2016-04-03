@@ -21,7 +21,7 @@ class RequestTypeTest < Minitest::Test
   def test_finds_most_used_request_types
     create_payloads(3)
 
-    assert_equal "GET", RequestType.most_frequent_request_types
+    assert_equal "GET", RequestType.most_frequent_request_type
   end
 
   def test_lists_all_request_types
