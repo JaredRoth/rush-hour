@@ -9,8 +9,7 @@ class Url < ActiveRecord::Base
   has_many :clients, through: :payload_requests
 
   def self.sort_most_requested
-    joins(:payload_requests).group(:url)
-    .order("count_all desc").count.keys
+    joins(:payload_requests).group(:url).order("count_all desc").count.keys
   end
 
   def sort_response_times

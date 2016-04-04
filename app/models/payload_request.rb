@@ -1,5 +1,5 @@
 class PayloadRequest < ActiveRecord::Base
-  validates :requested_at,          presence: true
+  validates :requested_at, :responded_in, :payload_sha, :url_id,           presence: true
   validates :responded_in,          presence: true
   validates :payload_sha,           presence: true, uniqueness: true
   validates :url_id,                presence: true

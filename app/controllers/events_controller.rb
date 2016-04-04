@@ -1,5 +1,5 @@
 module RushHour
-  class Server < Sinatra::Base
+  class EventsController < Server
 
     get '/sources/:identifier/events/:eventname' do |identifier, eventname|
       @event = Event.find_by(event_name: eventname)

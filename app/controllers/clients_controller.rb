@@ -1,6 +1,12 @@
 module RushHour
-  class Server < Sinatra::Base
+  class ClientsController < Server
 
+    post '/sources' do
+      client_loader = ClientLoader.new(params).create
+      status client_loader.status[:status]
+      body client_loader.body
+    end
+    
     get '/sources/:identifier' do |identifier|
       if !Client.exists?(identifier: identifier)
         error = "Sorry, no account registered under this name.</p>

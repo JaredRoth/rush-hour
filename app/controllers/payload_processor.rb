@@ -1,7 +1,7 @@
 require 'digest/sha1'
 
 class PayloadProcessor
-  attr_reader :parsed_payload, :identifier, :payload_sha
+  attr_reader :parsed_payload, :identifier, :payload_sha, :payload_requests
 
   def initialize(json_payload, identifier)
     if json_payload.nil?
@@ -16,10 +16,19 @@ class PayloadProcessor
 
   def process_payload
     payload = create_payload
-    if payload.save
-      [200, "Your submission was successful. "]
-
-    elsif parsed_payload.empty?
+    if !Client.exists?(identifier: identifier)
+      [200,  "Your submission was successful. "]
+      return
+    elsif PayloadRequest.exists?(payload_sha: Digest::SHA1.hexdigest(json_payload))
+      parsed_payload.empty?
+      [403, "#{payload.errors.full_messages.join(', ')}. "]
+      return
+    elsif create_payload.valid?
+    end
+    payload_requset = create_payload
+    if payload_request.valid?
+       [200, "Your submission was successful. "]
+    else
       [400, "#{payload.errors.full_messages.join(', ')}. "]
 
     elsif !Client.exists?(identifier: identifier)
@@ -40,18 +49,18 @@ class PayloadProcessor
     url               = Url.where(url: parsed_payload[:url]).first_or_create
     client            = Client.where(identifier: identifier).first_or_create
 
-    PayloadRequest.new(
-    :requested_at         => parsed_payload[:requestedAt],
-    :responded_in         => parsed_payload[:respondedIn],
-    :payload_sha          => payload_sha,
-    :ip_id                => ip.id,
-    :resolution_id        => resolution.id,
-    :user_agent_string_id => user_agent_string.id,
-    :event_id             => event.id,
-    :request_type_id      => request_type.id,
-    :referrer_id          => referrer.id,
-    :url_id               => url.id,
-    :client_id            => client.id
-    )
+    payload_request = PayloadRequest.create(requested_at: parsed_payload[:requestedAt],
+                      :responded_in         => parsed_payload[:respondedIn],
+                      :payload_sha          => payload_sha,
+                      ip:     Ip.where(ip: parsed_payload[:ip]).first_or_create
+                      :resolution:
+                      :user_agent_string_id => user_agent_string.id,
+                      :event_id             => event.id,
+                      :request_type_id      => request_type.id,
+                      :referrer_id          => referrer.id,
+                      :url_id               => url.id,
+                      :client_id            => client.id)
   end
+
+
 end

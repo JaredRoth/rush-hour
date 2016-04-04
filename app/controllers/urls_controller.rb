@@ -1,5 +1,5 @@
 module RushHour
-  class Server < Sinatra::Base
+  class UrlController < Server
     get '/sources/:identifier/urls/:relativepath' do |identifier, relativepath|
 
       @url = Url.find_by(url: build_client_url(identifier, relativepath))

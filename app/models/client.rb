@@ -6,6 +6,8 @@ class Client < ActiveRecord::Base
   validates :identifier, presence: true, uniqueness: true
   validates :rootUrl,    presence: true
 
+  validate :identifier_and_root_url_not_nil
+
   has_many :payload_requests
   has_many :request_types, through: :payload_requests
   has_many :user_agent_strings, through: :payload_requests
@@ -41,4 +43,9 @@ class Client < ActiveRecord::Base
   def list_clients_events
     events.pluck(:event_name).uniq
   end
+
+  def identifier_and_root_url_not_nil
+    !root_ur.nil? && !identifier.nil?
+  end
+
 end
