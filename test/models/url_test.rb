@@ -92,7 +92,7 @@ class UrlTest < Minitest::Test
   end
 
   def test_returns_top_three_user_agents
-    create_payloads(9)
+    create_payloads(12)
 
     url1 = Url.find_by(url: "http://jumpstartlab.com/blog")
     url2 = Url.find_by(url: "http://yahoo.com/about")
